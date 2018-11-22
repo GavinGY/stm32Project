@@ -1,0 +1,1527 @@
+ARM GAS  /tmp/ccZvTnYS.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"stm32f1xx_hal_rtc_ex.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.HAL_RTCEx_SetTamper,"ax",%progbits
+  20              		.align	2
+  21              		.global	HAL_RTCEx_SetTamper
+  22              		.thumb
+  23              		.thumb_func
+  25              	HAL_RTCEx_SetTamper:
+  26              	.LFB64:
+  27              		.file 1 "./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c"
+   1:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /**
+   2:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   ******************************************************************************
+   3:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @file    stm32f1xx_hal_rtc_ex.c
+   4:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @author  MCD Application Team
+   5:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @version V1.1.1
+   6:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @date    12-May-2017
+   7:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @brief   Extended RTC HAL module driver.
+   8:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *          This file provides firmware functions to manage the following 
+   9:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *          functionalities of the Real Time Clock (RTC) Extension peripheral:
+  10:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *           + RTC Tamper functions 
+  11:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *           + Extension Control functions
+  12:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *           + Extension RTC features functions    
+  13:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *         
+  14:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   ******************************************************************************
+  15:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @attention
+  16:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *
+  17:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  18:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *
+  19:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * Redistribution and use in source and binary forms, with or without modification,
+  20:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * are permitted provided that the following conditions are met:
+  21:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *   1. Redistributions of source code must retain the above copyright notice,
+  22:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *      this list of conditions and the following disclaimer.
+  23:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *   2. Redistributions in binary form must reproduce the above copyright notice,
+  24:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *      this list of conditions and the following disclaimer in the documentation
+  25:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *      and/or other materials provided with the distribution.
+  26:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *   3. Neither the name of STMicroelectronics nor the names of its contributors
+  27:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *      may be used to endorse or promote products derived from this software
+  28:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *      without specific prior written permission.
+  29:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *
+  30:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  31:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ARM GAS  /tmp/ccZvTnYS.s 			page 2
+
+
+  32:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  33:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  34:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  35:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  36:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  37:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  38:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  39:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  40:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *
+  41:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   ******************************************************************************  
+  42:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   */ 
+  43:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+  44:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /* Includes ------------------------------------------------------------------*/
+  45:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** #include "stm32f1xx_hal.h"
+  46:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+  47:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /** @addtogroup STM32F1xx_HAL_Driver
+  48:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @{
+  49:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   */
+  50:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   
+  51:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** #ifdef HAL_RTC_MODULE_ENABLED
+  52:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+  53:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /** @defgroup RTCEx RTCEx
+  54:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @brief RTC Extended HAL module driver
+  55:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @{
+  56:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   */
+  57:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   
+  58:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /* Private typedef -----------------------------------------------------------*/
+  59:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /* Private define ------------------------------------------------------------*/
+  60:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /* Private macro -------------------------------------------------------------*/
+  61:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /** @defgroup RTCEx_Private_Macros RTCEx Private Macros
+  62:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @{
+  63:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   */
+  64:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /**
+  65:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @}
+  66:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   */
+  67:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   
+  68:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /* Private variables ---------------------------------------------------------*/
+  69:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /* Private function prototypes -----------------------------------------------*/
+  70:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /* Private functions ---------------------------------------------------------*/
+  71:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+  72:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /** @defgroup RTCEx_Exported_Functions RTCEx Exported Functions
+  73:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @{
+  74:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   */
+  75:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   
+  76:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /** @defgroup RTCEx_Exported_Functions_Group1 RTC Tamper functions
+  77:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @brief    RTC Tamper functions
+  78:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *
+  79:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** @verbatim   
+  80:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****  ===============================================================================
+  81:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****                  ##### RTC Tamper functions #####
+  82:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****  ===============================================================================  
+  83:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****  
+  84:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****  [..] This section provides functions allowing to configure Tamper feature
+  85:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+  86:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** @endverbatim
+  87:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @{
+  88:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   */
+ARM GAS  /tmp/ccZvTnYS.s 			page 3
+
+
+  89:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+  90:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /**
+  91:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @brief  Sets Tamper
+  92:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @note   By calling this API we disable the tamper interrupt for all tampers. 
+  93:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @param  hrtc: pointer to a RTC_HandleTypeDef structure that contains
+  94:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *                the configuration information for RTC.
+  95:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @param  sTamper: Pointer to Tamper Structure.
+  96:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @note   Tamper can be enabled only if ASOE and CCO bit are reset
+  97:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @retval HAL status
+  98:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   */
+  99:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** HAL_StatusTypeDef HAL_RTCEx_SetTamper(RTC_HandleTypeDef *hrtc, RTC_TamperTypeDef* sTamper)
+ 100:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** {
+  28              		.loc 1 100 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+ 101:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Check input parameters */
+ 102:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   if((hrtc == NULL) || (sTamper == NULL))
+  34              		.loc 1 102 0
+  35 0000 10B3     		cbz	r0, .L4
+  36 0002 0346     		mov	r3, r0
+  37              		.loc 1 102 0 is_stmt 0 discriminator 1
+  38 0004 11B3     		cbz	r1, .L5
+ 103:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   {
+ 104:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****      return HAL_ERROR;
+ 105:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   }
+ 106:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   
+ 107:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Check the parameters */
+ 108:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   assert_param(IS_RTC_TAMPER(sTamper->Tamper));
+ 109:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   assert_param(IS_RTC_TAMPER_TRIGGER(sTamper->Trigger));
+ 110:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 111:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Process Locked */
+ 112:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   __HAL_LOCK(hrtc);
+  39              		.loc 1 112 0 is_stmt 1
+  40 0006 027C     		ldrb	r2, [r0, #16]	@ zero_extendqisi2
+  41 0008 012A     		cmp	r2, #1
+  42 000a 21D0     		beq	.L6
+  43              		.loc 1 112 0 is_stmt 0 discriminator 2
+  44 000c 0122     		movs	r2, #1
+  45 000e 0274     		strb	r2, [r0, #16]
+ 113:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 114:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   hrtc->State = HAL_RTC_STATE_BUSY;
+  46              		.loc 1 114 0 is_stmt 1 discriminator 2
+  47 0010 0222     		movs	r2, #2
+  48 0012 4274     		strb	r2, [r0, #17]
+ 115:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   
+ 116:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   if (HAL_IS_BIT_SET(BKP->RTCCR,(BKP_RTCCR_CCO | BKP_RTCCR_ASOE)))
+  49              		.loc 1 116 0 discriminator 2
+  50 0014 104A     		ldr	r2, .L9
+  51 0016 D26A     		ldr	r2, [r2, #44]
+  52 0018 12F4C07F 		tst	r2, #384
+  53 001c 05D0     		beq	.L3
+ 117:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   {
+ 118:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     hrtc->State = HAL_RTC_STATE_ERROR;
+  54              		.loc 1 118 0
+ARM GAS  /tmp/ccZvTnYS.s 			page 4
+
+
+  55 001e 0422     		movs	r2, #4
+  56 0020 4274     		strb	r2, [r0, #17]
+ 119:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     
+ 120:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     /* Process Unlocked */
+ 121:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     __HAL_UNLOCK(hrtc);
+  57              		.loc 1 121 0
+  58 0022 0022     		movs	r2, #0
+  59 0024 0274     		strb	r2, [r0, #16]
+ 122:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     
+ 123:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     return HAL_ERROR;
+  60              		.loc 1 123 0
+  61 0026 0120     		movs	r0, #1
+  62              	.LVL1:
+  63 0028 7047     		bx	lr
+  64              	.LVL2:
+  65              	.L3:
+ 100:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Check input parameters */
+  66              		.loc 1 100 0
+  67 002a 10B4     		push	{r4}
+  68              	.LCFI0:
+  69              		.cfi_def_cfa_offset 4
+  70              		.cfi_offset 4, -4
+ 124:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   }
+ 125:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 126:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   MODIFY_REG(BKP->CR, (BKP_CR_TPE | BKP_CR_TPAL), (sTamper->Tamper | (sTamper->Trigger)));
+  71              		.loc 1 126 0
+  72 002c 0A4C     		ldr	r4, .L9
+  73 002e 226B     		ldr	r2, [r4, #48]
+  74 0030 22F00300 		bic	r0, r2, #3
+  75              	.LVL3:
+  76 0034 0A68     		ldr	r2, [r1]
+  77 0036 4968     		ldr	r1, [r1, #4]
+  78              	.LVL4:
+  79 0038 0A43     		orrs	r2, r2, r1
+  80 003a 0243     		orrs	r2, r2, r0
+  81 003c 2263     		str	r2, [r4, #48]
+ 127:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 128:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   hrtc->State = HAL_RTC_STATE_READY; 
+  82              		.loc 1 128 0
+  83 003e 0122     		movs	r2, #1
+  84 0040 5A74     		strb	r2, [r3, #17]
+ 129:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 130:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Process Unlocked */
+ 131:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   __HAL_UNLOCK(hrtc);
+  85              		.loc 1 131 0
+  86 0042 0020     		movs	r0, #0
+  87 0044 1874     		strb	r0, [r3, #16]
+ 132:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 133:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   return HAL_OK;
+  88              		.loc 1 133 0
+  89 0046 05E0     		b	.L2
+  90              	.LVL5:
+  91              	.L4:
+  92              	.LCFI1:
+  93              		.cfi_def_cfa_offset 0
+  94              		.cfi_restore 4
+ 104:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   }
+ARM GAS  /tmp/ccZvTnYS.s 			page 5
+
+
+  95              		.loc 1 104 0
+  96 0048 0120     		movs	r0, #1
+  97              	.LVL6:
+  98 004a 7047     		bx	lr
+  99              	.LVL7:
+ 100              	.L5:
+ 101 004c 0120     		movs	r0, #1
+ 102              	.LVL8:
+ 103 004e 7047     		bx	lr
+ 104              	.LVL9:
+ 105              	.L6:
+ 112:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 106              		.loc 1 112 0
+ 107 0050 0220     		movs	r0, #2
+ 108              	.LVL10:
+ 109 0052 7047     		bx	lr
+ 110              	.LVL11:
+ 111              	.L2:
+ 112              	.LCFI2:
+ 113              		.cfi_def_cfa_offset 4
+ 114              		.cfi_offset 4, -4
+ 134:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** }
+ 115              		.loc 1 134 0
+ 116 0054 10BC     		pop	{r4}
+ 117              	.LCFI3:
+ 118              		.cfi_restore 4
+ 119              		.cfi_def_cfa_offset 0
+ 120 0056 7047     		bx	lr
+ 121              	.L10:
+ 122              		.align	2
+ 123              	.L9:
+ 124 0058 006C0040 		.word	1073769472
+ 125              		.cfi_endproc
+ 126              	.LFE64:
+ 128              		.section	.text.HAL_RTCEx_SetTamper_IT,"ax",%progbits
+ 129              		.align	2
+ 130              		.global	HAL_RTCEx_SetTamper_IT
+ 131              		.thumb
+ 132              		.thumb_func
+ 134              	HAL_RTCEx_SetTamper_IT:
+ 135              	.LFB65:
+ 135:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 136:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /**
+ 137:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @brief  Sets Tamper with interrupt.
+ 138:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @note   By calling this API we force the tamper interrupt for all tampers.
+ 139:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @param  hrtc: pointer to a RTC_HandleTypeDef structure that contains
+ 140:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *                the configuration information for RTC.
+ 141:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @param  sTamper: Pointer to RTC Tamper.
+ 142:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @note   Tamper can be enabled only if ASOE and CCO bit are reset
+ 143:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @retval HAL status
+ 144:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   */
+ 145:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** HAL_StatusTypeDef HAL_RTCEx_SetTamper_IT(RTC_HandleTypeDef *hrtc, RTC_TamperTypeDef* sTamper)
+ 146:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** {
+ 136              		.loc 1 146 0
+ 137              		.cfi_startproc
+ 138              		@ args = 0, pretend = 0, frame = 0
+ 139              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/ccZvTnYS.s 			page 6
+
+
+ 140              		@ link register save eliminated.
+ 141              	.LVL12:
+ 147:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Check input parameters */
+ 148:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   if((hrtc == NULL) || (sTamper == NULL))
+ 142              		.loc 1 148 0
+ 143 0000 30B3     		cbz	r0, .L14
+ 144 0002 0346     		mov	r3, r0
+ 145              		.loc 1 148 0 is_stmt 0 discriminator 1
+ 146 0004 31B3     		cbz	r1, .L15
+ 149:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   {
+ 150:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****      return HAL_ERROR;
+ 151:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   }
+ 152:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   
+ 153:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Check the parameters */
+ 154:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   assert_param(IS_RTC_TAMPER(sTamper->Tamper)); 
+ 155:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   assert_param(IS_RTC_TAMPER_TRIGGER(sTamper->Trigger));
+ 156:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 157:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Process Locked */
+ 158:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   __HAL_LOCK(hrtc);
+ 147              		.loc 1 158 0 is_stmt 1
+ 148 0006 027C     		ldrb	r2, [r0, #16]	@ zero_extendqisi2
+ 149 0008 012A     		cmp	r2, #1
+ 150 000a 25D0     		beq	.L16
+ 151              		.loc 1 158 0 is_stmt 0 discriminator 2
+ 152 000c 0122     		movs	r2, #1
+ 153 000e 0274     		strb	r2, [r0, #16]
+ 159:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 160:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   hrtc->State = HAL_RTC_STATE_BUSY;
+ 154              		.loc 1 160 0 is_stmt 1 discriminator 2
+ 155 0010 0222     		movs	r2, #2
+ 156 0012 4274     		strb	r2, [r0, #17]
+ 161:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 162:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   if (HAL_IS_BIT_SET(BKP->RTCCR,(BKP_RTCCR_CCO | BKP_RTCCR_ASOE)))
+ 157              		.loc 1 162 0 discriminator 2
+ 158 0014 124A     		ldr	r2, .L19
+ 159 0016 D26A     		ldr	r2, [r2, #44]
+ 160 0018 12F4C07F 		tst	r2, #384
+ 161 001c 05D0     		beq	.L13
+ 163:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   {
+ 164:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     hrtc->State = HAL_RTC_STATE_ERROR;
+ 162              		.loc 1 164 0
+ 163 001e 0422     		movs	r2, #4
+ 164 0020 4274     		strb	r2, [r0, #17]
+ 165:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     
+ 166:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     /* Process Unlocked */
+ 167:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     __HAL_UNLOCK(hrtc);
+ 165              		.loc 1 167 0
+ 166 0022 0022     		movs	r2, #0
+ 167 0024 0274     		strb	r2, [r0, #16]
+ 168:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     
+ 169:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     return HAL_ERROR;
+ 168              		.loc 1 169 0
+ 169 0026 0120     		movs	r0, #1
+ 170              	.LVL13:
+ 171 0028 7047     		bx	lr
+ 172              	.LVL14:
+ 173              	.L13:
+ARM GAS  /tmp/ccZvTnYS.s 			page 7
+
+
+ 146:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Check input parameters */
+ 174              		.loc 1 146 0
+ 175 002a 10B4     		push	{r4}
+ 176              	.LCFI4:
+ 177              		.cfi_def_cfa_offset 4
+ 178              		.cfi_offset 4, -4
+ 170:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   }
+ 171:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 172:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   MODIFY_REG(BKP->CR, (BKP_CR_TPE | BKP_CR_TPAL), (sTamper->Tamper | (sTamper->Trigger)));
+ 179              		.loc 1 172 0
+ 180 002c 0C48     		ldr	r0, .L19
+ 181              	.LVL15:
+ 182 002e 026B     		ldr	r2, [r0, #48]
+ 183 0030 22F00304 		bic	r4, r2, #3
+ 184 0034 0A68     		ldr	r2, [r1]
+ 185 0036 4968     		ldr	r1, [r1, #4]
+ 186              	.LVL16:
+ 187 0038 0A43     		orrs	r2, r2, r1
+ 188 003a 2243     		orrs	r2, r2, r4
+ 189 003c 0263     		str	r2, [r0, #48]
+ 173:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 174:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Configure the Tamper Interrupt in the BKP->CSR */
+ 175:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   __HAL_RTC_TAMPER_ENABLE_IT(hrtc, RTC_IT_TAMP1);
+ 190              		.loc 1 175 0
+ 191 003e 426B     		ldr	r2, [r0, #52]
+ 192 0040 42F00402 		orr	r2, r2, #4
+ 193 0044 4263     		str	r2, [r0, #52]
+ 176:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 177:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   hrtc->State = HAL_RTC_STATE_READY;
+ 194              		.loc 1 177 0
+ 195 0046 0122     		movs	r2, #1
+ 196 0048 5A74     		strb	r2, [r3, #17]
+ 178:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 179:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Process Unlocked */
+ 180:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   __HAL_UNLOCK(hrtc);
+ 197              		.loc 1 180 0
+ 198 004a 0020     		movs	r0, #0
+ 199 004c 1874     		strb	r0, [r3, #16]
+ 181:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 182:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   return HAL_OK;
+ 200              		.loc 1 182 0
+ 201 004e 05E0     		b	.L12
+ 202              	.LVL17:
+ 203              	.L14:
+ 204              	.LCFI5:
+ 205              		.cfi_def_cfa_offset 0
+ 206              		.cfi_restore 4
+ 150:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   }
+ 207              		.loc 1 150 0
+ 208 0050 0120     		movs	r0, #1
+ 209              	.LVL18:
+ 210 0052 7047     		bx	lr
+ 211              	.LVL19:
+ 212              	.L15:
+ 213 0054 0120     		movs	r0, #1
+ 214              	.LVL20:
+ 215 0056 7047     		bx	lr
+ARM GAS  /tmp/ccZvTnYS.s 			page 8
+
+
+ 216              	.LVL21:
+ 217              	.L16:
+ 158:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 218              		.loc 1 158 0
+ 219 0058 0220     		movs	r0, #2
+ 220              	.LVL22:
+ 221 005a 7047     		bx	lr
+ 222              	.LVL23:
+ 223              	.L12:
+ 224              	.LCFI6:
+ 225              		.cfi_def_cfa_offset 4
+ 226              		.cfi_offset 4, -4
+ 183:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** }
+ 227              		.loc 1 183 0
+ 228 005c 10BC     		pop	{r4}
+ 229              	.LCFI7:
+ 230              		.cfi_restore 4
+ 231              		.cfi_def_cfa_offset 0
+ 232 005e 7047     		bx	lr
+ 233              	.L20:
+ 234              		.align	2
+ 235              	.L19:
+ 236 0060 006C0040 		.word	1073769472
+ 237              		.cfi_endproc
+ 238              	.LFE65:
+ 240              		.section	.text.HAL_RTCEx_DeactivateTamper,"ax",%progbits
+ 241              		.align	2
+ 242              		.global	HAL_RTCEx_DeactivateTamper
+ 243              		.thumb
+ 244              		.thumb_func
+ 246              	HAL_RTCEx_DeactivateTamper:
+ 247              	.LFB66:
+ 184:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 185:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /**
+ 186:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @brief  Deactivates Tamper.
+ 187:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @param  hrtc: pointer to a RTC_HandleTypeDef structure that contains
+ 188:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *                the configuration information for RTC.
+ 189:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @param  Tamper: Selected tamper pin.
+ 190:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *          This parameter can be a value of @ref RTCEx_Tamper_Pins_Definitions
+ 191:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @retval HAL status
+ 192:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   */
+ 193:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** HAL_StatusTypeDef HAL_RTCEx_DeactivateTamper(RTC_HandleTypeDef *hrtc, uint32_t Tamper)
+ 194:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** {
+ 248              		.loc 1 194 0
+ 249              		.cfi_startproc
+ 250              		@ args = 0, pretend = 0, frame = 0
+ 251              		@ frame_needed = 0, uses_anonymous_args = 0
+ 252              		@ link register save eliminated.
+ 253              	.LVL24:
+ 195:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Check input parameters */
+ 196:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   if(hrtc == NULL)
+ 254              		.loc 1 196 0
+ 255 0000 0246     		mov	r2, r0
+ 256 0002 D0B1     		cbz	r0, .L23
+ 197:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   {
+ 198:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****      return HAL_ERROR;
+ 199:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   }
+ARM GAS  /tmp/ccZvTnYS.s 			page 9
+
+
+ 200:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Prevent unused argument(s) compilation warning */
+ 201:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   UNUSED(Tamper);
+ 202:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 203:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   assert_param(IS_RTC_TAMPER(Tamper));
+ 204:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 205:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Process Locked */
+ 206:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   __HAL_LOCK(hrtc);
+ 257              		.loc 1 206 0
+ 258 0004 037C     		ldrb	r3, [r0, #16]	@ zero_extendqisi2
+ 259 0006 012B     		cmp	r3, #1
+ 260 0008 19D0     		beq	.L24
+ 261              		.loc 1 206 0 is_stmt 0 discriminator 2
+ 262 000a 0120     		movs	r0, #1
+ 263              	.LVL25:
+ 264 000c 1074     		strb	r0, [r2, #16]
+ 207:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 208:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   hrtc->State = HAL_RTC_STATE_BUSY;
+ 265              		.loc 1 208 0 is_stmt 1 discriminator 2
+ 266 000e 0223     		movs	r3, #2
+ 267 0010 5374     		strb	r3, [r2, #17]
+ 209:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 210:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Disable the selected Tamper pin */
+ 211:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   CLEAR_BIT(BKP->CR, BKP_CR_TPE);
+ 268              		.loc 1 211 0 discriminator 2
+ 269 0012 0C4B     		ldr	r3, .L25
+ 270 0014 196B     		ldr	r1, [r3, #48]
+ 271              	.LVL26:
+ 272 0016 21F00101 		bic	r1, r1, #1
+ 273 001a 1963     		str	r1, [r3, #48]
+ 212:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   
+ 213:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Disable the Tamper Interrupt in the BKP->CSR */
+ 214:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Configure the Tamper Interrupt in the BKP->CSR */
+ 215:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   __HAL_RTC_TAMPER_DISABLE_IT(hrtc, RTC_IT_TAMP1);
+ 274              		.loc 1 215 0 discriminator 2
+ 275 001c 596B     		ldr	r1, [r3, #52]
+ 276 001e 21F00401 		bic	r1, r1, #4
+ 277 0022 5963     		str	r1, [r3, #52]
+ 216:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   
+ 217:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Clear the Tamper interrupt pending bit */
+ 218:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   __HAL_RTC_TAMPER_CLEAR_FLAG(hrtc, RTC_FLAG_TAMP1F);
+ 278              		.loc 1 218 0 discriminator 2
+ 279 0024 596B     		ldr	r1, [r3, #52]
+ 280 0026 41F00301 		orr	r1, r1, #3
+ 281 002a 5963     		str	r1, [r3, #52]
+ 219:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   SET_BIT(BKP->CSR, BKP_CSR_CTE);
+ 282              		.loc 1 219 0 discriminator 2
+ 283 002c 596B     		ldr	r1, [r3, #52]
+ 284 002e 0143     		orrs	r1, r1, r0
+ 285 0030 5963     		str	r1, [r3, #52]
+ 220:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   
+ 221:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   hrtc->State = HAL_RTC_STATE_READY;
+ 286              		.loc 1 221 0 discriminator 2
+ 287 0032 5074     		strb	r0, [r2, #17]
+ 222:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 223:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Process Unlocked */
+ 224:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   __HAL_UNLOCK(hrtc);
+ 288              		.loc 1 224 0 discriminator 2
+ARM GAS  /tmp/ccZvTnYS.s 			page 10
+
+
+ 289 0034 0020     		movs	r0, #0
+ 290 0036 1074     		strb	r0, [r2, #16]
+ 225:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 226:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   return HAL_OK;
+ 291              		.loc 1 226 0 discriminator 2
+ 292 0038 7047     		bx	lr
+ 293              	.LVL27:
+ 294              	.L23:
+ 198:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   }
+ 295              		.loc 1 198 0
+ 296 003a 0120     		movs	r0, #1
+ 297              	.LVL28:
+ 298 003c 7047     		bx	lr
+ 299              	.LVL29:
+ 300              	.L24:
+ 206:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 301              		.loc 1 206 0
+ 302 003e 0220     		movs	r0, #2
+ 303              	.LVL30:
+ 227:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** }
+ 304              		.loc 1 227 0
+ 305 0040 7047     		bx	lr
+ 306              	.L26:
+ 307 0042 00BF     		.align	2
+ 308              	.L25:
+ 309 0044 006C0040 		.word	1073769472
+ 310              		.cfi_endproc
+ 311              	.LFE66:
+ 313              		.section	.text.HAL_RTCEx_Tamper1EventCallback,"ax",%progbits
+ 314              		.align	2
+ 315              		.weak	HAL_RTCEx_Tamper1EventCallback
+ 316              		.thumb
+ 317              		.thumb_func
+ 319              	HAL_RTCEx_Tamper1EventCallback:
+ 320              	.LFB68:
+ 228:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 229:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /**
+ 230:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @brief  This function handles Tamper interrupt request.
+ 231:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @param  hrtc: pointer to a RTC_HandleTypeDef structure that contains
+ 232:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *                the configuration information for RTC.
+ 233:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @retval None
+ 234:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   */
+ 235:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** void HAL_RTCEx_TamperIRQHandler(RTC_HandleTypeDef *hrtc)
+ 236:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** {  
+ 237:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Get the status of the Interrupt */
+ 238:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   if(__HAL_RTC_TAMPER_GET_IT_SOURCE(hrtc, RTC_IT_TAMP1))
+ 239:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   {
+ 240:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     /* Get the TAMPER Interrupt enable bit and pending bit */
+ 241:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     if(__HAL_RTC_TAMPER_GET_FLAG(hrtc, RTC_FLAG_TAMP1F) != (uint32_t)RESET)
+ 242:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     {
+ 243:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****       /* Tamper callback */ 
+ 244:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****       HAL_RTCEx_Tamper1EventCallback(hrtc);
+ 245:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   
+ 246:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****       /* Clear the Tamper interrupt pending bit */
+ 247:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****       __HAL_RTC_TAMPER_CLEAR_FLAG(hrtc,RTC_FLAG_TAMP1F);
+ 248:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     }
+ 249:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   }
+ARM GAS  /tmp/ccZvTnYS.s 			page 11
+
+
+ 250:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 251:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Change RTC state */
+ 252:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   hrtc->State = HAL_RTC_STATE_READY;
+ 253:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** }
+ 254:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 255:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /**
+ 256:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @brief  Tamper 1 callback. 
+ 257:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @param  hrtc: pointer to a RTC_HandleTypeDef structure that contains
+ 258:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *                the configuration information for RTC.
+ 259:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @retval None
+ 260:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   */
+ 261:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** __weak void HAL_RTCEx_Tamper1EventCallback(RTC_HandleTypeDef *hrtc)
+ 262:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** {
+ 321              		.loc 1 262 0
+ 322              		.cfi_startproc
+ 323              		@ args = 0, pretend = 0, frame = 0
+ 324              		@ frame_needed = 0, uses_anonymous_args = 0
+ 325              		@ link register save eliminated.
+ 326              	.LVL31:
+ 327 0000 7047     		bx	lr
+ 328              		.cfi_endproc
+ 329              	.LFE68:
+ 331 0002 00BF     		.section	.text.HAL_RTCEx_TamperIRQHandler,"ax",%progbits
+ 332              		.align	2
+ 333              		.global	HAL_RTCEx_TamperIRQHandler
+ 334              		.thumb
+ 335              		.thumb_func
+ 337              	HAL_RTCEx_TamperIRQHandler:
+ 338              	.LFB67:
+ 236:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Get the status of the Interrupt */
+ 339              		.loc 1 236 0
+ 340              		.cfi_startproc
+ 341              		@ args = 0, pretend = 0, frame = 0
+ 342              		@ frame_needed = 0, uses_anonymous_args = 0
+ 343              	.LVL32:
+ 236:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Get the status of the Interrupt */
+ 344              		.loc 1 236 0
+ 345 0000 10B5     		push	{r4, lr}
+ 346              	.LCFI8:
+ 347              		.cfi_def_cfa_offset 8
+ 348              		.cfi_offset 4, -8
+ 349              		.cfi_offset 14, -4
+ 350 0002 0446     		mov	r4, r0
+ 238:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   {
+ 351              		.loc 1 238 0
+ 352 0004 094B     		ldr	r3, .L31
+ 353 0006 5B6B     		ldr	r3, [r3, #52]
+ 354 0008 13F0040F 		tst	r3, #4
+ 355 000c 0BD0     		beq	.L29
+ 241:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     {
+ 356              		.loc 1 241 0
+ 357 000e 074B     		ldr	r3, .L31
+ 358 0010 5B6B     		ldr	r3, [r3, #52]
+ 359 0012 13F4807F 		tst	r3, #256
+ 360 0016 06D0     		beq	.L29
+ 244:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   
+ 361              		.loc 1 244 0
+ARM GAS  /tmp/ccZvTnYS.s 			page 12
+
+
+ 362 0018 FFF7FEFF 		bl	HAL_RTCEx_Tamper1EventCallback
+ 363              	.LVL33:
+ 247:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     }
+ 364              		.loc 1 247 0
+ 365 001c 034A     		ldr	r2, .L31
+ 366 001e 536B     		ldr	r3, [r2, #52]
+ 367 0020 43F00303 		orr	r3, r3, #3
+ 368 0024 5363     		str	r3, [r2, #52]
+ 369              	.L29:
+ 252:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** }
+ 370              		.loc 1 252 0
+ 371 0026 0123     		movs	r3, #1
+ 372 0028 6374     		strb	r3, [r4, #17]
+ 373 002a 10BD     		pop	{r4, pc}
+ 374              	.LVL34:
+ 375              	.L32:
+ 376              		.align	2
+ 377              	.L31:
+ 378 002c 006C0040 		.word	1073769472
+ 379              		.cfi_endproc
+ 380              	.LFE67:
+ 382              		.section	.text.HAL_RTCEx_PollForTamper1Event,"ax",%progbits
+ 383              		.align	2
+ 384              		.global	HAL_RTCEx_PollForTamper1Event
+ 385              		.thumb
+ 386              		.thumb_func
+ 388              	HAL_RTCEx_PollForTamper1Event:
+ 389              	.LFB69:
+ 263:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Prevent unused argument(s) compilation warning */
+ 264:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   UNUSED(hrtc);
+ 265:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* NOTE : This function Should not be modified, when the callback is needed,
+ 266:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****             the HAL_RTCEx_Tamper1EventCallback could be implemented in the user file
+ 267:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****    */
+ 268:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** }
+ 269:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 270:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /**
+ 271:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @brief  This function handles Tamper1 Polling.
+ 272:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @param  hrtc: pointer to a RTC_HandleTypeDef structure that contains
+ 273:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *                the configuration information for RTC.
+ 274:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @param  Timeout: Timeout duration
+ 275:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @retval HAL status
+ 276:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   */
+ 277:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** HAL_StatusTypeDef HAL_RTCEx_PollForTamper1Event(RTC_HandleTypeDef *hrtc, uint32_t Timeout)
+ 278:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** {  
+ 390              		.loc 1 278 0
+ 391              		.cfi_startproc
+ 392              		@ args = 0, pretend = 0, frame = 0
+ 393              		@ frame_needed = 0, uses_anonymous_args = 0
+ 394              	.LVL35:
+ 395 0000 70B5     		push	{r4, r5, r6, lr}
+ 396              	.LCFI9:
+ 397              		.cfi_def_cfa_offset 16
+ 398              		.cfi_offset 4, -16
+ 399              		.cfi_offset 5, -12
+ 400              		.cfi_offset 6, -8
+ 401              		.cfi_offset 14, -4
+ 402 0002 0546     		mov	r5, r0
+ARM GAS  /tmp/ccZvTnYS.s 			page 13
+
+
+ 403 0004 0C46     		mov	r4, r1
+ 279:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   uint32_t tickstart = HAL_GetTick();
+ 404              		.loc 1 279 0
+ 405 0006 FFF7FEFF 		bl	HAL_GetTick
+ 406              	.LVL36:
+ 407 000a 0646     		mov	r6, r0
+ 408              	.LVL37:
+ 280:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 281:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Check input parameters */
+ 282:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   if(hrtc == NULL)
+ 409              		.loc 1 282 0
+ 410 000c 65B9     		cbnz	r5, .L36
+ 411 000e 19E0     		b	.L39
+ 412              	.LVL38:
+ 413              	.L38:
+ 283:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   {
+ 284:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****      return HAL_ERROR;
+ 285:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   }
+ 286:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   
+ 287:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Get the status of the Interrupt */
+ 288:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   while(__HAL_RTC_TAMPER_GET_FLAG(hrtc,RTC_FLAG_TAMP1F)== RESET)
+ 289:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   {
+ 290:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     if(Timeout != HAL_MAX_DELAY)
+ 414              		.loc 1 290 0
+ 415 0010 B4F1FF3F 		cmp	r4, #-1
+ 416 0014 08D0     		beq	.L36
+ 291:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     {
+ 292:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****       if((Timeout == 0U)||((HAL_GetTick() - tickstart ) > Timeout))
+ 417              		.loc 1 292 0
+ 418 0016 24B1     		cbz	r4, .L37
+ 419              		.loc 1 292 0 is_stmt 0 discriminator 1
+ 420 0018 FFF7FEFF 		bl	HAL_GetTick
+ 421              	.LVL39:
+ 422 001c 801B     		subs	r0, r0, r6
+ 423 001e 8442     		cmp	r4, r0
+ 424 0020 02D2     		bcs	.L36
+ 425              	.L37:
+ 293:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****       {
+ 294:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****         hrtc->State = HAL_RTC_STATE_TIMEOUT;
+ 426              		.loc 1 294 0 is_stmt 1
+ 427 0022 0320     		movs	r0, #3
+ 428 0024 6874     		strb	r0, [r5, #17]
+ 295:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****         return HAL_TIMEOUT;
+ 429              		.loc 1 295 0
+ 430 0026 70BD     		pop	{r4, r5, r6, pc}
+ 431              	.LVL40:
+ 432              	.L36:
+ 288:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   {
+ 433              		.loc 1 288 0
+ 434 0028 074B     		ldr	r3, .L41
+ 435 002a 5B6B     		ldr	r3, [r3, #52]
+ 436 002c 13F4807F 		tst	r3, #256
+ 437 0030 EED0     		beq	.L38
+ 296:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****       }
+ 297:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     }
+ 298:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   }
+ 299:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ARM GAS  /tmp/ccZvTnYS.s 			page 14
+
+
+ 300:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Clear the Tamper Flag */
+ 301:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   __HAL_RTC_TAMPER_CLEAR_FLAG(hrtc,RTC_FLAG_TAMP1F);
+ 438              		.loc 1 301 0
+ 439 0032 054A     		ldr	r2, .L41
+ 440 0034 536B     		ldr	r3, [r2, #52]
+ 441 0036 43F00303 		orr	r3, r3, #3
+ 442 003a 5363     		str	r3, [r2, #52]
+ 302:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 303:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Change RTC state */
+ 304:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   hrtc->State = HAL_RTC_STATE_READY;
+ 443              		.loc 1 304 0
+ 444 003c 0123     		movs	r3, #1
+ 445 003e 6B74     		strb	r3, [r5, #17]
+ 305:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 306:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   return HAL_OK;
+ 446              		.loc 1 306 0
+ 447 0040 0020     		movs	r0, #0
+ 448 0042 70BD     		pop	{r4, r5, r6, pc}
+ 449              	.LVL41:
+ 450              	.L39:
+ 284:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   }
+ 451              		.loc 1 284 0
+ 452 0044 0120     		movs	r0, #1
+ 453              	.LVL42:
+ 307:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** }
+ 454              		.loc 1 307 0
+ 455 0046 70BD     		pop	{r4, r5, r6, pc}
+ 456              	.LVL43:
+ 457              	.L42:
+ 458              		.align	2
+ 459              	.L41:
+ 460 0048 006C0040 		.word	1073769472
+ 461              		.cfi_endproc
+ 462              	.LFE69:
+ 464              		.section	.text.HAL_RTCEx_SetSecond_IT,"ax",%progbits
+ 465              		.align	2
+ 466              		.global	HAL_RTCEx_SetSecond_IT
+ 467              		.thumb
+ 468              		.thumb_func
+ 470              	HAL_RTCEx_SetSecond_IT:
+ 471              	.LFB70:
+ 308:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 309:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /**
+ 310:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @}
+ 311:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   */
+ 312:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   
+ 313:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /** @defgroup RTCEx_Exported_Functions_Group2 RTC Second functions
+ 314:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @brief    RTC Second functions
+ 315:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *
+ 316:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** @verbatim   
+ 317:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****  ===============================================================================
+ 318:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****                  ##### RTC Second functions #####
+ 319:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****  ===============================================================================  
+ 320:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****  
+ 321:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****  [..] This section provides functions implementing second interupt handlers
+ 322:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 323:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** @endverbatim
+ARM GAS  /tmp/ccZvTnYS.s 			page 15
+
+
+ 324:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @{
+ 325:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   */
+ 326:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 327:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /**
+ 328:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @brief  Sets Interrupt for second
+ 329:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @param  hrtc: pointer to a RTC_HandleTypeDef structure that contains
+ 330:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *                the configuration information for RTC.
+ 331:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @retval HAL status
+ 332:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   */
+ 333:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** HAL_StatusTypeDef HAL_RTCEx_SetSecond_IT(RTC_HandleTypeDef *hrtc)
+ 334:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** {
+ 472              		.loc 1 334 0
+ 473              		.cfi_startproc
+ 474              		@ args = 0, pretend = 0, frame = 0
+ 475              		@ frame_needed = 0, uses_anonymous_args = 0
+ 476              		@ link register save eliminated.
+ 477              	.LVL44:
+ 335:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Check input parameters */
+ 336:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   if(hrtc == NULL)
+ 478              		.loc 1 336 0
+ 479 0000 0346     		mov	r3, r0
+ 480 0002 70B1     		cbz	r0, .L45
+ 337:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   {
+ 338:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****      return HAL_ERROR;
+ 339:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   }
+ 340:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   
+ 341:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Process Locked */
+ 342:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   __HAL_LOCK(hrtc);
+ 481              		.loc 1 342 0
+ 482 0004 027C     		ldrb	r2, [r0, #16]	@ zero_extendqisi2
+ 483 0006 012A     		cmp	r2, #1
+ 484 0008 0DD0     		beq	.L46
+ 485              		.loc 1 342 0 is_stmt 0 discriminator 2
+ 486 000a 0121     		movs	r1, #1
+ 487 000c 0174     		strb	r1, [r0, #16]
+ 343:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 344:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   hrtc->State = HAL_RTC_STATE_BUSY;
+ 488              		.loc 1 344 0 is_stmt 1 discriminator 2
+ 489 000e 0222     		movs	r2, #2
+ 490 0010 4274     		strb	r2, [r0, #17]
+ 345:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 346:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Enable Second interuption */
+ 347:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   __HAL_RTC_SECOND_ENABLE_IT(hrtc, RTC_IT_SEC);
+ 491              		.loc 1 347 0 discriminator 2
+ 492 0012 0068     		ldr	r0, [r0]
+ 493              	.LVL45:
+ 494 0014 0268     		ldr	r2, [r0]
+ 495 0016 0A43     		orrs	r2, r2, r1
+ 496 0018 0260     		str	r2, [r0]
+ 348:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   
+ 349:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   hrtc->State = HAL_RTC_STATE_READY;
+ 497              		.loc 1 349 0 discriminator 2
+ 498 001a 5974     		strb	r1, [r3, #17]
+ 350:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 351:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Process Unlocked */
+ 352:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   __HAL_UNLOCK(hrtc);
+ 499              		.loc 1 352 0 discriminator 2
+ARM GAS  /tmp/ccZvTnYS.s 			page 16
+
+
+ 500 001c 0020     		movs	r0, #0
+ 501 001e 1874     		strb	r0, [r3, #16]
+ 353:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 354:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   return HAL_OK;
+ 502              		.loc 1 354 0 discriminator 2
+ 503 0020 7047     		bx	lr
+ 504              	.LVL46:
+ 505              	.L45:
+ 338:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   }
+ 506              		.loc 1 338 0
+ 507 0022 0120     		movs	r0, #1
+ 508              	.LVL47:
+ 509 0024 7047     		bx	lr
+ 510              	.LVL48:
+ 511              	.L46:
+ 342:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 512              		.loc 1 342 0
+ 513 0026 0220     		movs	r0, #2
+ 514              	.LVL49:
+ 355:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** }
+ 515              		.loc 1 355 0
+ 516 0028 7047     		bx	lr
+ 517              		.cfi_endproc
+ 518              	.LFE70:
+ 520 002a 00BF     		.section	.text.HAL_RTCEx_DeactivateSecond,"ax",%progbits
+ 521              		.align	2
+ 522              		.global	HAL_RTCEx_DeactivateSecond
+ 523              		.thumb
+ 524              		.thumb_func
+ 526              	HAL_RTCEx_DeactivateSecond:
+ 527              	.LFB71:
+ 356:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 357:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /**
+ 358:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @brief  Deactivates Second.
+ 359:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @param  hrtc: pointer to a RTC_HandleTypeDef structure that contains
+ 360:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *                the configuration information for RTC.
+ 361:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @retval HAL status
+ 362:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   */
+ 363:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** HAL_StatusTypeDef HAL_RTCEx_DeactivateSecond(RTC_HandleTypeDef *hrtc)
+ 364:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** {
+ 528              		.loc 1 364 0
+ 529              		.cfi_startproc
+ 530              		@ args = 0, pretend = 0, frame = 0
+ 531              		@ frame_needed = 0, uses_anonymous_args = 0
+ 532              		@ link register save eliminated.
+ 533              	.LVL50:
+ 365:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Check input parameters */
+ 366:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   if(hrtc == NULL)
+ 534              		.loc 1 366 0
+ 535 0000 0346     		mov	r3, r0
+ 536 0002 78B1     		cbz	r0, .L49
+ 367:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   {
+ 368:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****      return HAL_ERROR;
+ 369:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   }
+ 370:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   
+ 371:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Process Locked */
+ 372:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   __HAL_LOCK(hrtc);
+ARM GAS  /tmp/ccZvTnYS.s 			page 17
+
+
+ 537              		.loc 1 372 0
+ 538 0004 027C     		ldrb	r2, [r0, #16]	@ zero_extendqisi2
+ 539 0006 012A     		cmp	r2, #1
+ 540 0008 0ED0     		beq	.L50
+ 541              		.loc 1 372 0 is_stmt 0 discriminator 2
+ 542 000a 0121     		movs	r1, #1
+ 543 000c 0174     		strb	r1, [r0, #16]
+ 373:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 374:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   hrtc->State = HAL_RTC_STATE_BUSY;
+ 544              		.loc 1 374 0 is_stmt 1 discriminator 2
+ 545 000e 0222     		movs	r2, #2
+ 546 0010 4274     		strb	r2, [r0, #17]
+ 375:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 376:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Deactivate Second interuption*/ 
+ 377:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   __HAL_RTC_SECOND_DISABLE_IT(hrtc, RTC_IT_SEC);
+ 547              		.loc 1 377 0 discriminator 2
+ 548 0012 0068     		ldr	r0, [r0]
+ 549              	.LVL51:
+ 550 0014 0268     		ldr	r2, [r0]
+ 551 0016 22F00102 		bic	r2, r2, #1
+ 552 001a 0260     		str	r2, [r0]
+ 378:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   
+ 379:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   hrtc->State = HAL_RTC_STATE_READY;
+ 553              		.loc 1 379 0 discriminator 2
+ 554 001c 5974     		strb	r1, [r3, #17]
+ 380:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 381:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Process Unlocked */
+ 382:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   __HAL_UNLOCK(hrtc);
+ 555              		.loc 1 382 0 discriminator 2
+ 556 001e 0020     		movs	r0, #0
+ 557 0020 1874     		strb	r0, [r3, #16]
+ 383:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 384:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   return HAL_OK;
+ 558              		.loc 1 384 0 discriminator 2
+ 559 0022 7047     		bx	lr
+ 560              	.LVL52:
+ 561              	.L49:
+ 368:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   }
+ 562              		.loc 1 368 0
+ 563 0024 0120     		movs	r0, #1
+ 564              	.LVL53:
+ 565 0026 7047     		bx	lr
+ 566              	.LVL54:
+ 567              	.L50:
+ 372:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 568              		.loc 1 372 0
+ 569 0028 0220     		movs	r0, #2
+ 570              	.LVL55:
+ 385:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** }
+ 571              		.loc 1 385 0
+ 572 002a 7047     		bx	lr
+ 573              		.cfi_endproc
+ 574              	.LFE71:
+ 576              		.section	.text.HAL_RTCEx_RTCEventCallback,"ax",%progbits
+ 577              		.align	2
+ 578              		.weak	HAL_RTCEx_RTCEventCallback
+ 579              		.thumb
+ARM GAS  /tmp/ccZvTnYS.s 			page 18
+
+
+ 580              		.thumb_func
+ 582              	HAL_RTCEx_RTCEventCallback:
+ 583              	.LFB73:
+ 386:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 387:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /**
+ 388:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @brief  This function handles second interrupt request.
+ 389:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @param  hrtc: pointer to a RTC_HandleTypeDef structure that contains
+ 390:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *                the configuration information for RTC.
+ 391:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @retval None
+ 392:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   */
+ 393:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** void HAL_RTCEx_RTCIRQHandler(RTC_HandleTypeDef* hrtc)
+ 394:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** {
+ 395:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   if(__HAL_RTC_SECOND_GET_IT_SOURCE(hrtc, RTC_IT_SEC))
+ 396:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   {
+ 397:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     /* Get the status of the Interrupt */
+ 398:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     if(__HAL_RTC_SECOND_GET_FLAG(hrtc, RTC_FLAG_SEC))
+ 399:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     {
+ 400:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****       /* Check if Overrun occurred */
+ 401:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****       if (__HAL_RTC_SECOND_GET_FLAG(hrtc, RTC_FLAG_OW))
+ 402:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****       {
+ 403:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****         /* Second error callback */ 
+ 404:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****         HAL_RTCEx_RTCEventErrorCallback(hrtc);
+ 405:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****         
+ 406:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****         /* Clear flag Second */
+ 407:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****         __HAL_RTC_OVERFLOW_CLEAR_FLAG(hrtc, RTC_FLAG_OW);
+ 408:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****         
+ 409:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****         /* Change RTC state */
+ 410:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****         hrtc->State = HAL_RTC_STATE_ERROR; 
+ 411:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****       }
+ 412:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****       else 
+ 413:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****       {
+ 414:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****         /* Second callback */ 
+ 415:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****         HAL_RTCEx_RTCEventCallback(hrtc);
+ 416:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****         
+ 417:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****         /* Change RTC state */
+ 418:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****         hrtc->State = HAL_RTC_STATE_READY; 
+ 419:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****       }
+ 420:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****       
+ 421:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****       /* Clear flag Second */
+ 422:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****       __HAL_RTC_SECOND_CLEAR_FLAG(hrtc, RTC_FLAG_SEC);
+ 423:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     }
+ 424:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   }
+ 425:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** }
+ 426:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 427:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /**
+ 428:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @brief  Second event callback.
+ 429:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @param  hrtc: pointer to a RTC_HandleTypeDef structure that contains
+ 430:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *                the configuration information for RTC.
+ 431:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @retval None
+ 432:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   */
+ 433:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** __weak void HAL_RTCEx_RTCEventCallback(RTC_HandleTypeDef *hrtc)
+ 434:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** {
+ 584              		.loc 1 434 0
+ 585              		.cfi_startproc
+ 586              		@ args = 0, pretend = 0, frame = 0
+ 587              		@ frame_needed = 0, uses_anonymous_args = 0
+ 588              		@ link register save eliminated.
+ARM GAS  /tmp/ccZvTnYS.s 			page 19
+
+
+ 589              	.LVL56:
+ 590 0000 7047     		bx	lr
+ 591              		.cfi_endproc
+ 592              	.LFE73:
+ 594 0002 00BF     		.section	.text.HAL_RTCEx_RTCEventErrorCallback,"ax",%progbits
+ 595              		.align	2
+ 596              		.weak	HAL_RTCEx_RTCEventErrorCallback
+ 597              		.thumb
+ 598              		.thumb_func
+ 600              	HAL_RTCEx_RTCEventErrorCallback:
+ 601              	.LFB74:
+ 435:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Prevent unused argument(s) compilation warning */
+ 436:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   UNUSED(hrtc);
+ 437:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* NOTE : This function Should not be modified, when the callback is needed,
+ 438:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****             the HAL_RTCEx_RTCEventCallback could be implemented in the user file
+ 439:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****    */
+ 440:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** }
+ 441:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 442:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /**
+ 443:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @brief  Second event error callback.
+ 444:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @param  hrtc: pointer to a RTC_HandleTypeDef structure that contains
+ 445:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *                the configuration information for RTC.
+ 446:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @retval None
+ 447:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   */
+ 448:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** __weak void HAL_RTCEx_RTCEventErrorCallback(RTC_HandleTypeDef *hrtc)
+ 449:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** {
+ 602              		.loc 1 449 0
+ 603              		.cfi_startproc
+ 604              		@ args = 0, pretend = 0, frame = 0
+ 605              		@ frame_needed = 0, uses_anonymous_args = 0
+ 606              		@ link register save eliminated.
+ 607              	.LVL57:
+ 608 0000 7047     		bx	lr
+ 609              		.cfi_endproc
+ 610              	.LFE74:
+ 612 0002 00BF     		.section	.text.HAL_RTCEx_RTCIRQHandler,"ax",%progbits
+ 613              		.align	2
+ 614              		.global	HAL_RTCEx_RTCIRQHandler
+ 615              		.thumb
+ 616              		.thumb_func
+ 618              	HAL_RTCEx_RTCIRQHandler:
+ 619              	.LFB72:
+ 394:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   if(__HAL_RTC_SECOND_GET_IT_SOURCE(hrtc, RTC_IT_SEC))
+ 620              		.loc 1 394 0
+ 621              		.cfi_startproc
+ 622              		@ args = 0, pretend = 0, frame = 0
+ 623              		@ frame_needed = 0, uses_anonymous_args = 0
+ 624              	.LVL58:
+ 395:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   {
+ 625              		.loc 1 395 0
+ 626 0000 0368     		ldr	r3, [r0]
+ 627 0002 1A68     		ldr	r2, [r3]
+ 628 0004 12F0010F 		tst	r2, #1
+ 629 0008 1BD0     		beq	.L58
+ 398:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     {
+ 630              		.loc 1 398 0
+ 631 000a 5A68     		ldr	r2, [r3, #4]
+ARM GAS  /tmp/ccZvTnYS.s 			page 20
+
+
+ 632 000c 12F0010F 		tst	r2, #1
+ 633 0010 17D0     		beq	.L58
+ 394:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   if(__HAL_RTC_SECOND_GET_IT_SOURCE(hrtc, RTC_IT_SEC))
+ 634              		.loc 1 394 0
+ 635 0012 10B5     		push	{r4, lr}
+ 636              	.LCFI10:
+ 637              		.cfi_def_cfa_offset 8
+ 638              		.cfi_offset 4, -8
+ 639              		.cfi_offset 14, -4
+ 640 0014 0446     		mov	r4, r0
+ 401:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****       {
+ 641              		.loc 1 401 0
+ 642 0016 5B68     		ldr	r3, [r3, #4]
+ 643 0018 13F0040F 		tst	r3, #4
+ 644 001c 08D0     		beq	.L55
+ 404:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****         
+ 645              		.loc 1 404 0
+ 646 001e FFF7FEFF 		bl	HAL_RTCEx_RTCEventErrorCallback
+ 647              	.LVL59:
+ 407:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****         
+ 648              		.loc 1 407 0
+ 649 0022 2368     		ldr	r3, [r4]
+ 650 0024 6FF00402 		mvn	r2, #4
+ 651 0028 5A60     		str	r2, [r3, #4]
+ 410:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****       }
+ 652              		.loc 1 410 0
+ 653 002a 0423     		movs	r3, #4
+ 654 002c 6374     		strb	r3, [r4, #17]
+ 655 002e 03E0     		b	.L56
+ 656              	.LVL60:
+ 657              	.L55:
+ 415:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****         
+ 658              		.loc 1 415 0
+ 659 0030 FFF7FEFF 		bl	HAL_RTCEx_RTCEventCallback
+ 660              	.LVL61:
+ 418:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****       }
+ 661              		.loc 1 418 0
+ 662 0034 0123     		movs	r3, #1
+ 663 0036 6374     		strb	r3, [r4, #17]
+ 664              	.L56:
+ 422:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     }
+ 665              		.loc 1 422 0
+ 666 0038 2368     		ldr	r3, [r4]
+ 667 003a 6FF00102 		mvn	r2, #1
+ 668 003e 5A60     		str	r2, [r3, #4]
+ 669 0040 10BD     		pop	{r4, pc}
+ 670              	.LVL62:
+ 671              	.L58:
+ 672              	.LCFI11:
+ 673              		.cfi_def_cfa_offset 0
+ 674              		.cfi_restore 4
+ 675              		.cfi_restore 14
+ 676 0042 7047     		bx	lr
+ 677              		.cfi_endproc
+ 678              	.LFE72:
+ 680              		.section	.text.HAL_RTCEx_BKUPWrite,"ax",%progbits
+ 681              		.align	2
+ARM GAS  /tmp/ccZvTnYS.s 			page 21
+
+
+ 682              		.global	HAL_RTCEx_BKUPWrite
+ 683              		.thumb
+ 684              		.thumb_func
+ 686              	HAL_RTCEx_BKUPWrite:
+ 687              	.LFB75:
+ 450:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Prevent unused argument(s) compilation warning */
+ 451:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   UNUSED(hrtc);
+ 452:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* NOTE : This function Should not be modified, when the callback is needed,
+ 453:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****             the HAL_RTCEx_RTCEventErrorCallback could be implemented in the user file
+ 454:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****    */
+ 455:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** }
+ 456:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 457:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /**
+ 458:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @}
+ 459:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   */
+ 460:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   
+ 461:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /** @defgroup RTCEx_Exported_Functions_Group3 Extended Peripheral Control functions
+ 462:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @brief    Extended Peripheral Control functions
+ 463:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *
+ 464:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** @verbatim   
+ 465:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****  ===============================================================================
+ 466:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****               ##### Extension Peripheral Control functions #####
+ 467:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****  ===============================================================================  
+ 468:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     [..]
+ 469:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****     This subsection provides functions allowing to
+ 470:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****       (+) Writes a data in a specified RTC Backup data register
+ 471:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****       (+) Read a data in a specified RTC Backup data register
+ 472:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****       (+) Sets the Smooth calibration parameters.
+ 473:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 474:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** @endverbatim
+ 475:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @{
+ 476:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   */
+ 477:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 478:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /**
+ 479:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @brief  Writes a data in a specified RTC Backup data register.
+ 480:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @param  hrtc: pointer to a RTC_HandleTypeDef structure that contains
+ 481:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *                the configuration information for RTC. 
+ 482:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @param  BackupRegister: RTC Backup data Register number.
+ 483:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *          This parameter can be: RTC_BKP_DRx where x can be from 1 to 10 (or 42) to 
+ 484:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *                                 specify the register (depending devices).
+ 485:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @param  Data: Data to be written in the specified RTC Backup data register.                    
+ 486:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @retval None
+ 487:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   */
+ 488:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** void HAL_RTCEx_BKUPWrite(RTC_HandleTypeDef *hrtc, uint32_t BackupRegister, uint32_t Data)
+ 489:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** {
+ 688              		.loc 1 489 0
+ 689              		.cfi_startproc
+ 690              		@ args = 0, pretend = 0, frame = 0
+ 691              		@ frame_needed = 0, uses_anonymous_args = 0
+ 692              		@ link register save eliminated.
+ 693              	.LVL63:
+ 490:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   uint32_t tmp = 0U;
+ 491:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 492:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Prevent unused argument(s) compilation warning */
+ 493:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   UNUSED(hrtc);
+ 494:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 495:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Check the parameters */
+ARM GAS  /tmp/ccZvTnYS.s 			page 22
+
+
+ 496:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   assert_param(IS_RTC_BKP(BackupRegister));
+ 497:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   
+ 498:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   tmp = (uint32_t)BKP_BASE; 
+ 499:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   tmp += (BackupRegister * 4U);
+ 694              		.loc 1 499 0
+ 695 0000 8900     		lsls	r1, r1, #2
+ 696              	.LVL64:
+ 697 0002 01F18041 		add	r1, r1, #1073741824
+ 698 0006 01F5D841 		add	r1, r1, #27648
+ 699              	.LVL65:
+ 500:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 501:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *(__IO uint32_t *) tmp = (Data & BKP_DR1_D);
+ 700              		.loc 1 501 0
+ 701 000a 92B2     		uxth	r2, r2
+ 702              	.LVL66:
+ 703 000c 0A60     		str	r2, [r1]
+ 704 000e 7047     		bx	lr
+ 705              		.cfi_endproc
+ 706              	.LFE75:
+ 708              		.section	.text.HAL_RTCEx_BKUPRead,"ax",%progbits
+ 709              		.align	2
+ 710              		.global	HAL_RTCEx_BKUPRead
+ 711              		.thumb
+ 712              		.thumb_func
+ 714              	HAL_RTCEx_BKUPRead:
+ 715              	.LFB76:
+ 502:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** }
+ 503:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 504:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /**
+ 505:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @brief  Reads data from the specified RTC Backup data Register.
+ 506:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @param  hrtc: pointer to a RTC_HandleTypeDef structure that contains
+ 507:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *                the configuration information for RTC. 
+ 508:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @param  BackupRegister: RTC Backup data Register number.
+ 509:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *          This parameter can be: RTC_BKP_DRx where x can be from 1 to 10 (or 42) to 
+ 510:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *                                 specify the register (depending devices).
+ 511:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @retval Read value
+ 512:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   */
+ 513:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** uint32_t HAL_RTCEx_BKUPRead(RTC_HandleTypeDef *hrtc, uint32_t BackupRegister)
+ 514:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** {
+ 716              		.loc 1 514 0
+ 717              		.cfi_startproc
+ 718              		@ args = 0, pretend = 0, frame = 0
+ 719              		@ frame_needed = 0, uses_anonymous_args = 0
+ 720              		@ link register save eliminated.
+ 721              	.LVL67:
+ 515:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   uint32_t backupregister = 0U;
+ 516:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   uint32_t pvalue = 0U;
+ 517:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 518:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Prevent unused argument(s) compilation warning */
+ 519:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   UNUSED(hrtc);
+ 520:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 521:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Check the parameters */
+ 522:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   assert_param(IS_RTC_BKP(BackupRegister));
+ 523:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 524:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   backupregister = (uint32_t)BKP_BASE; 
+ 525:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   backupregister += (BackupRegister * 4U);
+ 722              		.loc 1 525 0
+ARM GAS  /tmp/ccZvTnYS.s 			page 23
+
+
+ 723 0000 8900     		lsls	r1, r1, #2
+ 724              	.LVL68:
+ 725 0002 01F18041 		add	r1, r1, #1073741824
+ 726 0006 01F5D841 		add	r1, r1, #27648
+ 727              	.LVL69:
+ 526:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   
+ 527:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   pvalue = (*(__IO uint32_t *)(backupregister)) & BKP_DR1_D;
+ 728              		.loc 1 527 0
+ 729 000a 0868     		ldr	r0, [r1]
+ 730              	.LVL70:
+ 528:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 529:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Read the specified register */
+ 530:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   return pvalue;
+ 531:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** }
+ 731              		.loc 1 531 0
+ 732 000c 80B2     		uxth	r0, r0
+ 733              	.LVL71:
+ 734 000e 7047     		bx	lr
+ 735              		.cfi_endproc
+ 736              	.LFE76:
+ 738              		.section	.text.HAL_RTCEx_SetSmoothCalib,"ax",%progbits
+ 739              		.align	2
+ 740              		.global	HAL_RTCEx_SetSmoothCalib
+ 741              		.thumb
+ 742              		.thumb_func
+ 744              	HAL_RTCEx_SetSmoothCalib:
+ 745              	.LFB77:
+ 532:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 533:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 534:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** /**
+ 535:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @brief  Sets the Smooth calibration parameters.
+ 536:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @param  hrtc: RTC handle  
+ 537:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @param  SmoothCalibPeriod: Not used (only present for compatibility with another families)
+ 538:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @param  SmoothCalibPlusPulses: Not used (only present for compatibility with another families)
+ 539:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @param  SmouthCalibMinusPulsesValue: specifies the RTC Clock Calibration value.
+ 540:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   *          This parameter must be a number between 0 and 0x7F.
+ 541:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   * @retval HAL status
+ 542:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   */
+ 543:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** HAL_StatusTypeDef HAL_RTCEx_SetSmoothCalib(RTC_HandleTypeDef* hrtc, uint32_t SmoothCalibPeriod, uin
+ 544:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** {
+ 746              		.loc 1 544 0
+ 747              		.cfi_startproc
+ 748              		@ args = 0, pretend = 0, frame = 0
+ 749              		@ frame_needed = 0, uses_anonymous_args = 0
+ 750              		@ link register save eliminated.
+ 751              	.LVL72:
+ 545:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Check input parameters */
+ 546:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   if(hrtc == NULL)
+ 752              		.loc 1 546 0
+ 753 0000 90B1     		cbz	r0, .L63
+ 754 0002 0246     		mov	r2, r0
+ 755              	.LVL73:
+ 547:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   {
+ 548:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****      return HAL_ERROR;
+ 549:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   }
+ 550:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Prevent unused argument(s) compilation warning */
+ 551:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   UNUSED(SmoothCalibPeriod);
+ARM GAS  /tmp/ccZvTnYS.s 			page 24
+
+
+ 552:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   UNUSED(SmoothCalibPlusPulses);
+ 553:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 554:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Check the parameters */
+ 555:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   assert_param(IS_RTC_SMOOTH_CALIB_MINUS(SmouthCalibMinusPulsesValue));
+ 556:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   
+ 557:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Process Locked */
+ 558:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   __HAL_LOCK(hrtc);
+ 756              		.loc 1 558 0
+ 757 0004 017C     		ldrb	r1, [r0, #16]	@ zero_extendqisi2
+ 758              	.LVL74:
+ 759 0006 0129     		cmp	r1, #1
+ 760 0008 10D0     		beq	.L64
+ 544:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Check input parameters */
+ 761              		.loc 1 544 0 discriminator 2
+ 762 000a 10B4     		push	{r4}
+ 763              	.LCFI12:
+ 764              		.cfi_def_cfa_offset 4
+ 765              		.cfi_offset 4, -4
+ 766              		.loc 1 558 0 discriminator 2
+ 767 000c 0120     		movs	r0, #1
+ 768              	.LVL75:
+ 769 000e 1074     		strb	r0, [r2, #16]
+ 559:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 560:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   hrtc->State = HAL_RTC_STATE_BUSY;
+ 770              		.loc 1 560 0 discriminator 2
+ 771 0010 0221     		movs	r1, #2
+ 772 0012 5174     		strb	r1, [r2, #17]
+ 561:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 562:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Sets RTC Clock Calibration value.*/
+ 563:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   MODIFY_REG(BKP->RTCCR, BKP_RTCCR_CAL, SmouthCalibMinusPulsesValue);
+ 773              		.loc 1 563 0 discriminator 2
+ 774 0014 074C     		ldr	r4, .L67
+ 775 0016 E16A     		ldr	r1, [r4, #44]
+ 776 0018 21F07F01 		bic	r1, r1, #127
+ 777 001c 0B43     		orrs	r3, r3, r1
+ 778              	.LVL76:
+ 779 001e E362     		str	r3, [r4, #44]
+ 564:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 565:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Change RTC state */
+ 566:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   hrtc->State = HAL_RTC_STATE_READY;
+ 780              		.loc 1 566 0 discriminator 2
+ 781 0020 5074     		strb	r0, [r2, #17]
+ 567:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 568:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   /* Process Unlocked */
+ 569:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   __HAL_UNLOCK(hrtc);
+ 782              		.loc 1 569 0 discriminator 2
+ 783 0022 0020     		movs	r0, #0
+ 784 0024 1074     		strb	r0, [r2, #16]
+ 570:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 571:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   return HAL_OK;
+ 785              		.loc 1 571 0 discriminator 2
+ 786 0026 03E0     		b	.L62
+ 787              	.LVL77:
+ 788              	.L63:
+ 789              	.LCFI13:
+ 790              		.cfi_def_cfa_offset 0
+ 791              		.cfi_restore 4
+ARM GAS  /tmp/ccZvTnYS.s 			page 25
+
+
+ 548:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c ****   }
+ 792              		.loc 1 548 0
+ 793 0028 0120     		movs	r0, #1
+ 794              	.LVL78:
+ 795 002a 7047     		bx	lr
+ 796              	.LVL79:
+ 797              	.L64:
+ 558:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** 
+ 798              		.loc 1 558 0
+ 799 002c 0220     		movs	r0, #2
+ 800              	.LVL80:
+ 801 002e 7047     		bx	lr
+ 802              	.LVL81:
+ 803              	.L62:
+ 804              	.LCFI14:
+ 805              		.cfi_def_cfa_offset 4
+ 806              		.cfi_offset 4, -4
+ 572:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c **** }
+ 807              		.loc 1 572 0
+ 808 0030 10BC     		pop	{r4}
+ 809              	.LCFI15:
+ 810              		.cfi_restore 4
+ 811              		.cfi_def_cfa_offset 0
+ 812 0032 7047     		bx	lr
+ 813              	.L68:
+ 814              		.align	2
+ 815              	.L67:
+ 816 0034 006C0040 		.word	1073769472
+ 817              		.cfi_endproc
+ 818              	.LFE77:
+ 820              		.text
+ 821              	.Letext0:
+ 822              		.file 2 "/opt/toolchain/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/machine/_default_types.
+ 823              		.file 3 "/opt/toolchain/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/sys/_stdint.h"
+ 824              		.file 4 "Drivers/CMSIS/Device/Inc/stm32f103xb.h"
+ 825              		.file 5 "Drivers/CMSIS/Device/Inc/stm32f1xx.h"
+ 826              		.file 6 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 827              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc.h"
+ 828              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc_ex.h"
+ 829              		.file 9 "Drivers/CMSIS/Inc/core_cm3.h"
+ 830              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ARM GAS  /tmp/ccZvTnYS.s 			page 26
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f1xx_hal_rtc_ex.c
+     /tmp/ccZvTnYS.s:20     .text.HAL_RTCEx_SetTamper:00000000 $t
+     /tmp/ccZvTnYS.s:25     .text.HAL_RTCEx_SetTamper:00000000 HAL_RTCEx_SetTamper
+     /tmp/ccZvTnYS.s:124    .text.HAL_RTCEx_SetTamper:00000058 $d
+     /tmp/ccZvTnYS.s:129    .text.HAL_RTCEx_SetTamper_IT:00000000 $t
+     /tmp/ccZvTnYS.s:134    .text.HAL_RTCEx_SetTamper_IT:00000000 HAL_RTCEx_SetTamper_IT
+     /tmp/ccZvTnYS.s:236    .text.HAL_RTCEx_SetTamper_IT:00000060 $d
+     /tmp/ccZvTnYS.s:241    .text.HAL_RTCEx_DeactivateTamper:00000000 $t
+     /tmp/ccZvTnYS.s:246    .text.HAL_RTCEx_DeactivateTamper:00000000 HAL_RTCEx_DeactivateTamper
+     /tmp/ccZvTnYS.s:309    .text.HAL_RTCEx_DeactivateTamper:00000044 $d
+     /tmp/ccZvTnYS.s:314    .text.HAL_RTCEx_Tamper1EventCallback:00000000 $t
+     /tmp/ccZvTnYS.s:319    .text.HAL_RTCEx_Tamper1EventCallback:00000000 HAL_RTCEx_Tamper1EventCallback
+     /tmp/ccZvTnYS.s:332    .text.HAL_RTCEx_TamperIRQHandler:00000000 $t
+     /tmp/ccZvTnYS.s:337    .text.HAL_RTCEx_TamperIRQHandler:00000000 HAL_RTCEx_TamperIRQHandler
+     /tmp/ccZvTnYS.s:378    .text.HAL_RTCEx_TamperIRQHandler:0000002c $d
+     /tmp/ccZvTnYS.s:383    .text.HAL_RTCEx_PollForTamper1Event:00000000 $t
+     /tmp/ccZvTnYS.s:388    .text.HAL_RTCEx_PollForTamper1Event:00000000 HAL_RTCEx_PollForTamper1Event
+     /tmp/ccZvTnYS.s:460    .text.HAL_RTCEx_PollForTamper1Event:00000048 $d
+     /tmp/ccZvTnYS.s:465    .text.HAL_RTCEx_SetSecond_IT:00000000 $t
+     /tmp/ccZvTnYS.s:470    .text.HAL_RTCEx_SetSecond_IT:00000000 HAL_RTCEx_SetSecond_IT
+     /tmp/ccZvTnYS.s:521    .text.HAL_RTCEx_DeactivateSecond:00000000 $t
+     /tmp/ccZvTnYS.s:526    .text.HAL_RTCEx_DeactivateSecond:00000000 HAL_RTCEx_DeactivateSecond
+     /tmp/ccZvTnYS.s:577    .text.HAL_RTCEx_RTCEventCallback:00000000 $t
+     /tmp/ccZvTnYS.s:582    .text.HAL_RTCEx_RTCEventCallback:00000000 HAL_RTCEx_RTCEventCallback
+     /tmp/ccZvTnYS.s:595    .text.HAL_RTCEx_RTCEventErrorCallback:00000000 $t
+     /tmp/ccZvTnYS.s:600    .text.HAL_RTCEx_RTCEventErrorCallback:00000000 HAL_RTCEx_RTCEventErrorCallback
+     /tmp/ccZvTnYS.s:613    .text.HAL_RTCEx_RTCIRQHandler:00000000 $t
+     /tmp/ccZvTnYS.s:618    .text.HAL_RTCEx_RTCIRQHandler:00000000 HAL_RTCEx_RTCIRQHandler
+     /tmp/ccZvTnYS.s:681    .text.HAL_RTCEx_BKUPWrite:00000000 $t
+     /tmp/ccZvTnYS.s:686    .text.HAL_RTCEx_BKUPWrite:00000000 HAL_RTCEx_BKUPWrite
+     /tmp/ccZvTnYS.s:709    .text.HAL_RTCEx_BKUPRead:00000000 $t
+     /tmp/ccZvTnYS.s:714    .text.HAL_RTCEx_BKUPRead:00000000 HAL_RTCEx_BKUPRead
+     /tmp/ccZvTnYS.s:739    .text.HAL_RTCEx_SetSmoothCalib:00000000 $t
+     /tmp/ccZvTnYS.s:744    .text.HAL_RTCEx_SetSmoothCalib:00000000 HAL_RTCEx_SetSmoothCalib
+     /tmp/ccZvTnYS.s:816    .text.HAL_RTCEx_SetSmoothCalib:00000034 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+HAL_GetTick

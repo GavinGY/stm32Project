@@ -1,0 +1,410 @@
+ARM GAS  /tmp/cc6GfSEs.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"stm32f1xx_hal_spi_ex.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.HAL_SPI_Init,"ax",%progbits
+  20              		.align	2
+  21              		.global	HAL_SPI_Init
+  22              		.thumb
+  23              		.thumb_func
+  25              	HAL_SPI_Init:
+  26              	.LFB64:
+  27              		.file 1 "./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c"
+   1:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** /**
+   2:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   ******************************************************************************
+   3:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * @file    stm32f1xx_hal_spi_ex.c
+   4:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * @author  MCD Application Team
+   5:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * @version V1.1.1
+   6:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * @date    12-May-2017
+   7:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * @brief   Extended SPI HAL module driver.
+   8:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   *    
+   9:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   *          This file provides firmware functions to manage the following 
+  10:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   *          functionalities SPI extension peripheral:
+  11:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   *           + Extended Peripheral Control functions
+  12:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   *  
+  13:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   ******************************************************************************
+  14:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * @attention
+  15:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   *
+  16:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  17:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   *
+  18:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * Redistribution and use in source and binary forms, with or without modification,
+  19:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * are permitted provided that the following conditions are met:
+  20:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   *   1. Redistributions of source code must retain the above copyright notice,
+  21:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   *      this list of conditions and the following disclaimer.
+  22:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   *   2. Redistributions in binary form must reproduce the above copyright notice,
+  23:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   *      this list of conditions and the following disclaimer in the documentation
+  24:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   *      and/or other materials provided with the distribution.
+  25:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   *   3. Neither the name of STMicroelectronics nor the names of its contributors
+  26:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   *      may be used to endorse or promote products derived from this software
+  27:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   *      without specific prior written permission.
+  28:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   *
+  29:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  30:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  31:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ARM GAS  /tmp/cc6GfSEs.s 			page 2
+
+
+  32:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  33:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  34:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  35:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  36:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  37:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  38:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  39:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   *
+  40:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   ******************************************************************************
+  41:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   */
+  42:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** 
+  43:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** /* Includes ------------------------------------------------------------------*/
+  44:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** #include "stm32f1xx_hal.h"
+  45:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** 
+  46:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** /** @addtogroup STM32F1xx_HAL_Driver
+  47:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * @{
+  48:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   */
+  49:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** 
+  50:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** /** @addtogroup SPI
+  51:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * @{
+  52:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   */
+  53:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** #ifdef HAL_SPI_MODULE_ENABLED
+  54:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** 
+  55:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** /** @defgroup SPI_Private_Variables SPI Private Variables
+  56:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * @{
+  57:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   */
+  58:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** #if (USE_SPI_CRC != 0U)
+  59:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** /* Variable used to determine if device is impacted by implementation of workaround
+  60:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****    related to wrong CRC errors detection on SPI2. Conditions in which this workaround has to be app
+  61:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****     - STM32F101CDE/STM32F103CDE
+  62:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****     - Revision ID : Z
+  63:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****     - SPI2
+  64:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****     - In receive only mode, with CRC calculation enabled, at the end of the CRC reception,
+  65:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****       the software needs to check the CRCERR flag. If it is found set, read back the SPI_RXCRC:
+  66:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****         + If the value is 0, the complete data transfer is successful.
+  67:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****         + Otherwise, one or more errors have been detected during the data transfer by CPU or DMA.
+  68:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****       If CRCERR is found reset, the complete data transfer is considered successful.
+  69:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** */
+  70:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** uint8_t uCRCErrorWorkaroundCheck = 0U;
+  71:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** #endif /* USE_SPI_CRC */
+  72:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** /**
+  73:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * @}
+  74:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   */
+  75:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** 
+  76:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** 
+  77:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** /* Private typedef -----------------------------------------------------------*/
+  78:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** /* Private define ------------------------------------------------------------*/
+  79:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** /* Private macro -------------------------------------------------------------*/
+  80:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** /* Private variables ---------------------------------------------------------*/
+  81:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** /* Private function prototypes -----------------------------------------------*/
+  82:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** /* Private functions ---------------------------------------------------------*/
+  83:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** 
+  84:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** /** @addtogroup SPI_Exported_Functions
+  85:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * @{
+  86:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   */
+  87:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** 
+  88:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** /** @addtogroup SPI_Exported_Functions_Group1
+ARM GAS  /tmp/cc6GfSEs.s 			page 3
+
+
+  89:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   *
+  90:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * @{
+  91:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   */
+  92:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** 
+  93:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** /**
+  94:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * @brief  Initializes the SPI according to the specified parameters 
+  95:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   *         in the SPI_InitTypeDef and create the associated handle.
+  96:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * @param  hspi: pointer to a SPI_HandleTypeDef structure that contains
+  97:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   *                the configuration information for SPI module.
+  98:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * @retval HAL status
+  99:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   */
+ 100:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** HAL_StatusTypeDef HAL_SPI_Init(SPI_HandleTypeDef *hspi)
+ 101:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** {
+  28              		.loc 1 101 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              	.LVL0:
+ 102:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   /* Check the SPI handle allocation */
+ 103:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   if(hspi == NULL)
+  33              		.loc 1 103 0
+  34 0000 0028     		cmp	r0, #0
+  35 0002 3CD0     		beq	.L4
+ 101:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   /* Check the SPI handle allocation */
+  36              		.loc 1 101 0
+  37 0004 10B5     		push	{r4, lr}
+  38              	.LCFI0:
+  39              		.cfi_def_cfa_offset 8
+  40              		.cfi_offset 4, -8
+  41              		.cfi_offset 14, -4
+  42 0006 0446     		mov	r4, r0
+ 104:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   {
+ 105:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****     return HAL_ERROR;
+ 106:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   }
+ 107:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** 
+ 108:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   /* Check the parameters */
+ 109:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   assert_param(IS_SPI_ALL_INSTANCE(hspi->Instance));
+ 110:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   assert_param(IS_SPI_MODE(hspi->Init.Mode));
+ 111:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   assert_param(IS_SPI_DIRECTION(hspi->Init.Direction));
+ 112:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   assert_param(IS_SPI_DATASIZE(hspi->Init.DataSize));
+ 113:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   assert_param(IS_SPI_CPOL(hspi->Init.CLKPolarity));
+ 114:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   assert_param(IS_SPI_CPHA(hspi->Init.CLKPhase));
+ 115:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   assert_param(IS_SPI_NSS(hspi->Init.NSS));
+ 116:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   assert_param(IS_SPI_BAUDRATE_PRESCALER(hspi->Init.BaudRatePrescaler));
+ 117:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   assert_param(IS_SPI_FIRST_BIT(hspi->Init.FirstBit));
+ 118:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** 
+ 119:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** #if (USE_SPI_CRC != 0U)
+ 120:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   assert_param(IS_SPI_CRC_CALCULATION(hspi->Init.CRCCalculation));
+ 121:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   if(hspi->Init.CRCCalculation == SPI_CRCCALCULATION_ENABLE)
+ 122:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   {
+ 123:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****     assert_param(IS_SPI_CRC_POLYNOMIAL(hspi->Init.CRCPolynomial));
+ 124:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   }
+ 125:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** #else
+ 126:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   hspi->Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
+ 127:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** #endif /* USE_SPI_CRC */
+ 128:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** 
+ 129:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   if(hspi->State == HAL_SPI_STATE_RESET)
+ARM GAS  /tmp/cc6GfSEs.s 			page 4
+
+
+  43              		.loc 1 129 0
+  44 0008 90F85130 		ldrb	r3, [r0, #81]	@ zero_extendqisi2
+  45 000c 13F0FF0F 		tst	r3, #255
+  46 0010 01D1     		bne	.L3
+ 130:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   {
+ 131:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****     /* Init the low level hardware : GPIO, CLOCK, NVIC... */
+ 132:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****     HAL_SPI_MspInit(hspi);
+  47              		.loc 1 132 0
+  48 0012 FFF7FEFF 		bl	HAL_SPI_MspInit
+  49              	.LVL1:
+  50              	.L3:
+ 133:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   }
+ 134:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   
+ 135:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   hspi->State = HAL_SPI_STATE_BUSY;
+  51              		.loc 1 135 0
+  52 0016 0223     		movs	r3, #2
+  53 0018 84F85130 		strb	r3, [r4, #81]
+ 136:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** 
+ 137:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   /* Disble the selected SPI peripheral */
+ 138:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   __HAL_SPI_DISABLE(hspi);
+  54              		.loc 1 138 0
+  55 001c 2268     		ldr	r2, [r4]
+  56 001e 1368     		ldr	r3, [r2]
+  57 0020 23F04003 		bic	r3, r3, #64
+  58 0024 1360     		str	r3, [r2]
+ 139:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** 
+ 140:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   /*----------------------- SPIx CR1 & CR2 Configuration ---------------------*/
+ 141:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   /* Configure : SPI Mode, Communication Mode, Data size, Clock polarity and phase, NSS management,
+ 142:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   Communication speed, First bit and CRC calculation state */
+ 143:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   WRITE_REG(hspi->Instance->CR1, (hspi->Init.Mode | hspi->Init.Direction | hspi->Init.DataSize |
+  59              		.loc 1 143 0
+  60 0026 2168     		ldr	r1, [r4]
+  61 0028 6268     		ldr	r2, [r4, #4]
+  62 002a A368     		ldr	r3, [r4, #8]
+  63 002c 1A43     		orrs	r2, r2, r3
+  64 002e E368     		ldr	r3, [r4, #12]
+  65 0030 1A43     		orrs	r2, r2, r3
+  66 0032 2369     		ldr	r3, [r4, #16]
+  67 0034 1A43     		orrs	r2, r2, r3
+  68 0036 6369     		ldr	r3, [r4, #20]
+  69 0038 1A43     		orrs	r2, r2, r3
+  70 003a A369     		ldr	r3, [r4, #24]
+  71 003c 03F40073 		and	r3, r3, #512
+  72 0040 1343     		orrs	r3, r3, r2
+  73 0042 E269     		ldr	r2, [r4, #28]
+  74 0044 1343     		orrs	r3, r3, r2
+  75 0046 226A     		ldr	r2, [r4, #32]
+  76 0048 1343     		orrs	r3, r3, r2
+  77 004a A26A     		ldr	r2, [r4, #40]
+  78 004c 1A43     		orrs	r2, r2, r3
+  79 004e 0A60     		str	r2, [r1]
+ 144:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****                                   hspi->Init.CLKPolarity | hspi->Init.CLKPhase | (hspi->Init.NSS & 
+ 145:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****                                   hspi->Init.BaudRatePrescaler | hspi->Init.FirstBit  | hspi->Init.
+ 146:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** 
+ 147:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   /* Configure : NSS management */
+ 148:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   WRITE_REG(hspi->Instance->CR2, (((hspi->Init.NSS >> 16U) & SPI_CR2_SSOE) | hspi->Init.TIMode));
+  80              		.loc 1 148 0
+ARM GAS  /tmp/cc6GfSEs.s 			page 5
+
+
+  81 0050 2168     		ldr	r1, [r4]
+  82 0052 638B     		ldrh	r3, [r4, #26]
+  83 0054 03F00402 		and	r2, r3, #4
+  84 0058 636A     		ldr	r3, [r4, #36]
+  85 005a 1343     		orrs	r3, r3, r2
+  86 005c 4B60     		str	r3, [r1, #4]
+ 149:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** 
+ 150:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   /*---------------------------- SPIx CRCPOLY Configuration ------------------*/
+ 151:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   /* Configure : CRC Polynomial */
+ 152:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   WRITE_REG(hspi->Instance->CRCPR, hspi->Init.CRCPolynomial);
+  87              		.loc 1 152 0
+  88 005e 2368     		ldr	r3, [r4]
+  89 0060 E26A     		ldr	r2, [r4, #44]
+  90 0062 1A61     		str	r2, [r3, #16]
+ 153:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** 
+ 154:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** #if defined(SPI_I2SCFGR_I2SMOD)
+ 155:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   /* Activate the SPI mode (Make sure that I2SMOD bit in I2SCFGR register is reset) */
+ 156:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   CLEAR_BIT(hspi->Instance->I2SCFGR, SPI_I2SCFGR_I2SMOD);
+  91              		.loc 1 156 0
+  92 0064 2268     		ldr	r2, [r4]
+  93 0066 D369     		ldr	r3, [r2, #28]
+  94 0068 23F40063 		bic	r3, r3, #2048
+  95 006c D361     		str	r3, [r2, #28]
+ 157:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** #endif /* SPI_I2SCFGR_I2SMOD */
+ 158:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** 
+ 159:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** #if (USE_SPI_CRC != 0U)
+ 160:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** #if defined (STM32F101xE) || defined (STM32F103xE)
+ 161:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   /* Check RevisionID value for identifying if Device is Rev Z (0x0001) in order to enable workarou
+ 162:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****      CRC errors wrongly detected */
+ 163:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   /* Pb is that ES_STM32F10xxCDE also identify an issue in Debug registers access while not in Debu
+ 164:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****      Revision ID information is only available in Debug mode, so Workaround could not be implemente
+ 165:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****      to distinguish Rev Z devices (issue present) from more recent version (issue fixed).
+ 166:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****      So, in case of Revison Z F101 or F103 devices, below variable should be assigned to 1 */
+ 167:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   uCRCErrorWorkaroundCheck = 0U;
+ 168:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** #else
+ 169:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   uCRCErrorWorkaroundCheck = 0U;
+  96              		.loc 1 169 0
+  97 006e 0020     		movs	r0, #0
+  98 0070 044B     		ldr	r3, .L7
+  99 0072 1870     		strb	r0, [r3]
+ 170:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** #endif /* STM32F101xE || STM32F103xE */
+ 171:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** #endif /* USE_SPI_CRC */
+ 172:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** 
+ 173:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   hspi->ErrorCode = HAL_SPI_ERROR_NONE;
+ 100              		.loc 1 173 0
+ 101 0074 6065     		str	r0, [r4, #84]
+ 174:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   hspi->State = HAL_SPI_STATE_READY;
+ 102              		.loc 1 174 0
+ 103 0076 0123     		movs	r3, #1
+ 104 0078 84F85130 		strb	r3, [r4, #81]
+ 175:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   
+ 176:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   return HAL_OK;
+ 105              		.loc 1 176 0
+ 106 007c 10BD     		pop	{r4, pc}
+ 107              	.LVL2:
+ 108              	.L4:
+ 109              	.LCFI1:
+ARM GAS  /tmp/cc6GfSEs.s 			page 6
+
+
+ 110              		.cfi_def_cfa_offset 0
+ 111              		.cfi_restore 4
+ 112              		.cfi_restore 14
+ 105:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   }
+ 113              		.loc 1 105 0
+ 114 007e 0120     		movs	r0, #1
+ 115              	.LVL3:
+ 116 0080 7047     		bx	lr
+ 117              	.L8:
+ 118 0082 00BF     		.align	2
+ 119              	.L7:
+ 120 0084 00000000 		.word	.LANCHOR0
+ 121              		.cfi_endproc
+ 122              	.LFE64:
+ 124              		.section	.text.SPI_ISCRCErrorValid,"ax",%progbits
+ 125              		.align	2
+ 126              		.global	SPI_ISCRCErrorValid
+ 127              		.thumb
+ 128              		.thumb_func
+ 130              	SPI_ISCRCErrorValid:
+ 131              	.LFB65:
+ 177:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** }
+ 178:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** 
+ 179:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** /**
+ 180:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * @}
+ 181:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   */
+ 182:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** 
+ 183:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** /**
+ 184:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * @}
+ 185:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   */
+ 186:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** 
+ 187:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** /** @addtogroup SPI_Private_Functions
+ 188:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * @{
+ 189:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   */
+ 190:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** #if (USE_SPI_CRC != 0U)
+ 191:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** /**
+ 192:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * @brief  Checks if encountered CRC error could be corresponding to wrongly detected errors 
+ 193:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   *         according to SPI instance, Device type, and revision ID.
+ 194:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * @param  hspi: pointer to a SPI_HandleTypeDef structure that contains
+ 195:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   *               the configuration information for SPI module.
+ 196:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   * @retval CRC error validity (SPI_INVALID_CRC_ERROR or SPI_VALID_CRC_ERROR).  
+ 197:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** */
+ 198:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** uint8_t SPI_ISCRCErrorValid(SPI_HandleTypeDef *hspi)
+ 199:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** {
+ 132              		.loc 1 199 0
+ 133              		.cfi_startproc
+ 134              		@ args = 0, pretend = 0, frame = 0
+ 135              		@ frame_needed = 0, uses_anonymous_args = 0
+ 136              		@ link register save eliminated.
+ 137              	.LVL4:
+ 200:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** #if defined(STM32F101xE) || defined(STM32F103xE)
+ 201:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   /* Check how to handle this CRC error (workaround to be applied or not) */
+ 202:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   /* If CRC errors could be wrongly detected (issue 2.15.2 in STM32F10xxC/D/E silicon limitations E
+ 203:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   if((uCRCErrorWorkaroundCheck != 0U) && (hspi->Instance == SPI2))
+ 204:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   {
+ 205:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****     if(hspi->Instance->RXCRCR == 0U)
+ 206:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****     {
+ARM GAS  /tmp/cc6GfSEs.s 			page 7
+
+
+ 207:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****       return (SPI_INVALID_CRC_ERROR);
+ 208:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****     }
+ 209:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   }
+ 210:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   return (SPI_VALID_CRC_ERROR);
+ 211:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** #else
+ 212:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   /* Prevent unused argument(s) compilation warning */
+ 213:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   UNUSED(hspi);
+ 214:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** 
+ 215:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c ****   return (SPI_VALID_CRC_ERROR);
+ 216:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** #endif
+ 217:./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c **** }
+ 138              		.loc 1 217 0
+ 139 0000 0120     		movs	r0, #1
+ 140              	.LVL5:
+ 141 0002 7047     		bx	lr
+ 142              		.cfi_endproc
+ 143              	.LFE65:
+ 145              		.global	uCRCErrorWorkaroundCheck
+ 146              		.section	.bss.uCRCErrorWorkaroundCheck,"aw",%nobits
+ 147              		.set	.LANCHOR0,. + 0
+ 150              	uCRCErrorWorkaroundCheck:
+ 151 0000 00       		.space	1
+ 152              		.text
+ 153              	.Letext0:
+ 154              		.file 2 "/opt/toolchain/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/machine/_default_types.
+ 155              		.file 3 "/opt/toolchain/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/sys/_stdint.h"
+ 156              		.file 4 "Drivers/CMSIS/Device/Inc/stm32f103xb.h"
+ 157              		.file 5 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 158              		.file 6 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 159              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h"
+ 160              		.file 8 "Drivers/CMSIS/Inc/core_cm3.h"
+ARM GAS  /tmp/cc6GfSEs.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f1xx_hal_spi_ex.c
+     /tmp/cc6GfSEs.s:20     .text.HAL_SPI_Init:00000000 $t
+     /tmp/cc6GfSEs.s:25     .text.HAL_SPI_Init:00000000 HAL_SPI_Init
+     /tmp/cc6GfSEs.s:120    .text.HAL_SPI_Init:00000084 $d
+     /tmp/cc6GfSEs.s:125    .text.SPI_ISCRCErrorValid:00000000 $t
+     /tmp/cc6GfSEs.s:130    .text.SPI_ISCRCErrorValid:00000000 SPI_ISCRCErrorValid
+     /tmp/cc6GfSEs.s:150    .bss.uCRCErrorWorkaroundCheck:00000000 uCRCErrorWorkaroundCheck
+     /tmp/cc6GfSEs.s:151    .bss.uCRCErrorWorkaroundCheck:00000000 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+HAL_SPI_MspInit

@@ -1,0 +1,647 @@
+ARM GAS  /tmp/ccknLsux.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"usart.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text._sys_exit,"ax",%progbits
+  20              		.align	2
+  21              		.global	_sys_exit
+  22              		.thumb
+  23              		.thumb_func
+  25              	_sys_exit:
+  26              	.LFB64:
+  27              		.file 1 "./System/Src/usart.c"
+   1:./System/Src/usart.c **** #include "sys.h"
+   2:./System/Src/usart.c **** #include "usart.h"	
+   3:./System/Src/usart.c **** ////////////////////////////////////////////////////////////////////////////////// 	 
+   4:./System/Src/usart.c **** //»Áπ˚ π”√ucos,‘Ú∞¸¿®œ¬√ÊµƒÕ∑Œƒº˛º¥ø….
+   5:./System/Src/usart.c **** #if SYSTEM_SUPPORT_OS
+   6:./System/Src/usart.c **** #include "includes.h"					//ucos  π”√	  
+   7:./System/Src/usart.c **** #endif
+   8:./System/Src/usart.c **** //////////////////////////////////////////////////////////////////////////////////	 
+   9:./System/Src/usart.c **** //±æ≥Ã–Ú÷ªπ©—ßœ∞ π”√£¨Œ¥æ≠◊˜’ﬂ–Ìø…£¨≤ªµ√”√”⁄∆‰À¸»Œ∫Œ”√Õæ
+  10:./System/Src/usart.c **** //ALIENTEK STM32ø™∑¢∞Â
+  11:./System/Src/usart.c **** //¥Æø⁄1≥ı ºªØ		   
+  12:./System/Src/usart.c **** //’˝µ„‘≠◊”@ALIENTEK
+  13:./System/Src/usart.c **** //ºº ı¬€Ã≥:www.openedv.com
+  14:./System/Src/usart.c **** //–ﬁ∏ƒ»’∆⁄:2012/8/18
+  15:./System/Src/usart.c **** //∞Ê±æ£∫V1.5
+  16:./System/Src/usart.c **** //∞Ê»®À˘”–£¨µ¡∞Ê±ÿæø°£
+  17:./System/Src/usart.c **** //Copyright(C) π„÷› ––«“ÌµÁ◊”ø∆ºº”–œﬁπ´Àæ 2009-2019
+  18:./System/Src/usart.c **** //All rights reserved
+  19:./System/Src/usart.c **** //********************************************************************************
+  20:./System/Src/usart.c **** //V1.3–ﬁ∏ƒÀµ√˜ 
+  21:./System/Src/usart.c **** //÷ß≥÷  ”¶≤ªÕ¨∆µ¬ œ¬µƒ¥Æø⁄≤®Ãÿ¬ …Ë÷√.
+  22:./System/Src/usart.c **** //º”»Î¡À∂‘printfµƒ÷ß≥÷
+  23:./System/Src/usart.c **** //‘ˆº”¡À¥Æø⁄Ω” ’√¸¡Óπ¶ƒ‹.
+  24:./System/Src/usart.c **** //–ﬁ’˝¡Àprintfµ⁄“ª∏ˆ◊÷∑˚∂™ ßµƒbug
+  25:./System/Src/usart.c **** //V1.4–ﬁ∏ƒÀµ√˜
+  26:./System/Src/usart.c **** //1,–ﬁ∏ƒ¥Æø⁄≥ı ºªØIOµƒbug
+  27:./System/Src/usart.c **** //2,–ﬁ∏ƒ¡ÀUSART_RX_STA, πµ√¥Æø⁄◊Ó¥ÛΩ” ’◊÷Ω⁄ ˝Œ™2µƒ14¥Œ∑Ω
+  28:./System/Src/usart.c **** //3,‘ˆº”¡ÀUSART_REC_LEN,”√”⁄∂®“Â¥Æø⁄◊Ó¥Û‘ –ÌΩ” ’µƒ◊÷Ω⁄ ˝(≤ª¥Û”⁄2µƒ14¥Œ∑Ω)
+  29:./System/Src/usart.c **** //4,–ﬁ∏ƒ¡ÀEN_USART1_RXµƒ πƒ‹∑Ω Ω
+  30:./System/Src/usart.c **** //V1.5–ﬁ∏ƒÀµ√˜
+  31:./System/Src/usart.c **** //1,‘ˆº”¡À∂‘UCOSIIµƒ÷ß≥÷
+ARM GAS  /tmp/ccknLsux.s 			page 2
+
+
+  32:./System/Src/usart.c **** ////////////////////////////////////////////////////////////////////////////////// 	  
+  33:./System/Src/usart.c ****  
+  34:./System/Src/usart.c **** 
+  35:./System/Src/usart.c **** //////////////////////////////////////////////////////////////////
+  36:./System/Src/usart.c **** //º”»Î“‘œ¬¥˙¬Î,÷ß≥÷printf∫Ø ˝,∂¯≤ª–Ë“™—°‘Òuse MicroLIB	  
+  37:./System/Src/usart.c **** #if 1
+  38:./System/Src/usart.c **** #pragma import(__use_no_semihosting)             
+  39:./System/Src/usart.c **** //±Í◊ºø‚–Ë“™µƒ÷ß≥÷∫Ø ˝                 
+  40:./System/Src/usart.c **** struct __FILE 
+  41:./System/Src/usart.c **** { 
+  42:./System/Src/usart.c **** 	int handle; 
+  43:./System/Src/usart.c **** 
+  44:./System/Src/usart.c **** }; 
+  45:./System/Src/usart.c **** 
+  46:./System/Src/usart.c **** FILE __stdout;       
+  47:./System/Src/usart.c **** //∂®“Â_sys_exit()“‘±‹√‚ π”√∞Î÷˜ª˙ƒ£ Ω    
+  48:./System/Src/usart.c **** void _sys_exit(int x) 
+  49:./System/Src/usart.c **** { 
+  28              		.loc 1 49 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+  34 0000 7047     		bx	lr
+  35              		.cfi_endproc
+  36              	.LFE64:
+  38 0002 00BF     		.section	.text.fputc,"ax",%progbits
+  39              		.align	2
+  40              		.global	fputc
+  41              		.thumb
+  42              		.thumb_func
+  44              	fputc:
+  45              	.LFB65:
+  50:./System/Src/usart.c **** 	x = x; 
+  51:./System/Src/usart.c **** } 
+  52:./System/Src/usart.c **** //÷ÿ∂®“Âfputc∫Ø ˝ 
+  53:./System/Src/usart.c **** int fputc(int ch, FILE *f)
+  54:./System/Src/usart.c **** {      
+  46              		.loc 1 54 0
+  47              		.cfi_startproc
+  48              		@ args = 0, pretend = 0, frame = 0
+  49              		@ frame_needed = 0, uses_anonymous_args = 0
+  50              		@ link register save eliminated.
+  51              	.LVL1:
+  52              	.L3:
+  55:./System/Src/usart.c **** 	while((USART1->SR&0X40)==0);//—≠ª∑∑¢ÀÕ,÷±µΩ∑¢ÀÕÕÍ±œ   
+  53              		.loc 1 55 0 discriminator 1
+  54 0000 044B     		ldr	r3, .L4
+  55 0002 1B68     		ldr	r3, [r3]
+  56 0004 13F0400F 		tst	r3, #64
+  57 0008 FAD0     		beq	.L3
+  56:./System/Src/usart.c ****     USART1->DR = (u8) ch;      
+  58              		.loc 1 56 0
+  59 000a C2B2     		uxtb	r2, r0
+  60 000c 014B     		ldr	r3, .L4
+  61 000e 5A60     		str	r2, [r3, #4]
+ARM GAS  /tmp/ccknLsux.s 			page 3
+
+
+  57:./System/Src/usart.c **** 	return ch;
+  58:./System/Src/usart.c **** }
+  62              		.loc 1 58 0
+  63 0010 7047     		bx	lr
+  64              	.L5:
+  65 0012 00BF     		.align	2
+  66              	.L4:
+  67 0014 00380140 		.word	1073821696
+  68              		.cfi_endproc
+  69              	.LFE65:
+  71              		.section	.text.uart_init,"ax",%progbits
+  72              		.align	2
+  73              		.global	uart_init
+  74              		.thumb
+  75              		.thumb_func
+  77              	uart_init:
+  78              	.LFB66:
+  59:./System/Src/usart.c **** #endif 
+  60:./System/Src/usart.c **** 
+  61:./System/Src/usart.c **** 
+  62:./System/Src/usart.c **** #if EN_USART1_RX   //»Áπ˚ πƒ‹¡ÀΩ” ’
+  63:./System/Src/usart.c **** //¥Æø⁄1÷–∂œ∑˛ŒÒ≥Ã–Ú
+  64:./System/Src/usart.c **** //◊¢“‚,∂¡»°USARTx->SRƒ‹±‹√‚ƒ™√˚∆‰√Óµƒ¥ÌŒÛ   	
+  65:./System/Src/usart.c **** u8 USART_RX_BUF[USART_REC_LEN];     //Ω” ’ª∫≥Â,◊Ó¥ÛUSART_REC_LEN∏ˆ◊÷Ω⁄.
+  66:./System/Src/usart.c **** //Ω” ’◊¥Ã¨
+  67:./System/Src/usart.c **** //bit15£¨	Ω” ’ÕÍ≥…±Í÷æ
+  68:./System/Src/usart.c **** //bit14£¨	Ω” ’µΩ0x0d
+  69:./System/Src/usart.c **** //bit13~0£¨	Ω” ’µΩµƒ”––ß◊÷Ω⁄ ˝ƒø
+  70:./System/Src/usart.c **** u16 USART_RX_STA=0;       //Ω” ’◊¥Ã¨±Íº«	  
+  71:./System/Src/usart.c **** 
+  72:./System/Src/usart.c **** u8 aRxBuffer[RXBUFFERSIZE];//HALø‚ π”√µƒ¥Æø⁄Ω” ’ª∫≥Â
+  73:./System/Src/usart.c **** UART_HandleTypeDef UART1_Handler; //UARTæ‰±˙
+  74:./System/Src/usart.c ****   
+  75:./System/Src/usart.c **** //≥ı ºªØIO ¥Æø⁄1 
+  76:./System/Src/usart.c **** //bound:≤®Ãÿ¬ 
+  77:./System/Src/usart.c **** void uart_init(u32 bound)
+  78:./System/Src/usart.c **** {	
+  79              		.loc 1 78 0
+  80              		.cfi_startproc
+  81              		@ args = 0, pretend = 0, frame = 0
+  82              		@ frame_needed = 0, uses_anonymous_args = 0
+  83              	.LVL2:
+  84 0000 10B5     		push	{r4, lr}
+  85              	.LCFI0:
+  86              		.cfi_def_cfa_offset 8
+  87              		.cfi_offset 4, -8
+  88              		.cfi_offset 14, -4
+  79:./System/Src/usart.c **** 	//UART ≥ı ºªØ…Ë÷√
+  80:./System/Src/usart.c **** 	UART1_Handler.Instance=USART1;					    //USART1
+  89              		.loc 1 80 0
+  90 0002 0A4C     		ldr	r4, .L8
+  91 0004 0A4B     		ldr	r3, .L8+4
+  92 0006 2360     		str	r3, [r4]
+  81:./System/Src/usart.c **** 	UART1_Handler.Init.BaudRate=bound;				    //≤®Ãÿ¬ 
+  93              		.loc 1 81 0
+  94 0008 6060     		str	r0, [r4, #4]
+  82:./System/Src/usart.c **** 	UART1_Handler.Init.WordLength=UART_WORDLENGTH_8B;   //◊÷≥§Œ™8Œª ˝æ›∏Ò Ω
+ARM GAS  /tmp/ccknLsux.s 			page 4
+
+
+  95              		.loc 1 82 0
+  96 000a 0023     		movs	r3, #0
+  97 000c A360     		str	r3, [r4, #8]
+  83:./System/Src/usart.c **** 	UART1_Handler.Init.StopBits=UART_STOPBITS_1;	    //“ª∏ˆÕ£÷πŒª
+  98              		.loc 1 83 0
+  99 000e E360     		str	r3, [r4, #12]
+  84:./System/Src/usart.c **** 	UART1_Handler.Init.Parity=UART_PARITY_NONE;		    //Œﬁ∆Ê≈º–£—ÈŒª
+ 100              		.loc 1 84 0
+ 101 0010 2361     		str	r3, [r4, #16]
+  85:./System/Src/usart.c **** 	UART1_Handler.Init.HwFlowCtl=UART_HWCONTROL_NONE;   //Œﬁ”≤º˛¡˜øÿ
+ 102              		.loc 1 85 0
+ 103 0012 A361     		str	r3, [r4, #24]
+  86:./System/Src/usart.c **** 	UART1_Handler.Init.Mode=UART_MODE_TX_RX;		    // ’∑¢ƒ£ Ω
+ 104              		.loc 1 86 0
+ 105 0014 0C23     		movs	r3, #12
+ 106 0016 6361     		str	r3, [r4, #20]
+  87:./System/Src/usart.c **** 	HAL_UART_Init(&UART1_Handler);					    //HAL_UART_Init()ª· πƒ‹UART1
+ 107              		.loc 1 87 0
+ 108 0018 2046     		mov	r0, r4
+ 109              	.LVL3:
+ 110 001a FFF7FEFF 		bl	HAL_UART_Init
+ 111              	.LVL4:
+  88:./System/Src/usart.c **** 	
+  89:./System/Src/usart.c **** 	HAL_UART_Receive_IT(&UART1_Handler, (u8 *)aRxBuffer, RXBUFFERSIZE);//∏√∫Ø ˝ª·ø™∆ÙΩ” ’÷–∂œ£∫±Í÷æŒªU
+ 112              		.loc 1 89 0
+ 113 001e 0122     		movs	r2, #1
+ 114 0020 0449     		ldr	r1, .L8+8
+ 115 0022 2046     		mov	r0, r4
+ 116 0024 FFF7FEFF 		bl	HAL_UART_Receive_IT
+ 117              	.LVL5:
+ 118 0028 10BD     		pop	{r4, pc}
+ 119              	.L9:
+ 120 002a 00BF     		.align	2
+ 121              	.L8:
+ 122 002c 00000000 		.word	UART1_Handler
+ 123 0030 00380140 		.word	1073821696
+ 124 0034 00000000 		.word	aRxBuffer
+ 125              		.cfi_endproc
+ 126              	.LFE66:
+ 128              		.section	.text.HAL_UART_MspInit,"ax",%progbits
+ 129              		.align	2
+ 130              		.global	HAL_UART_MspInit
+ 131              		.thumb
+ 132              		.thumb_func
+ 134              	HAL_UART_MspInit:
+ 135              	.LFB67:
+  90:./System/Src/usart.c ****   
+  91:./System/Src/usart.c **** }
+  92:./System/Src/usart.c **** 
+  93:./System/Src/usart.c **** //UARTµ◊≤„≥ı ºªØ£¨ ±÷” πƒ‹£¨“˝Ω≈≈‰÷√£¨÷–∂œ≈‰÷√
+  94:./System/Src/usart.c **** //¥À∫Ø ˝ª·±ªHAL_UART_Init()µ˜”√
+  95:./System/Src/usart.c **** //huart:¥Æø⁄æ‰±˙
+  96:./System/Src/usart.c **** 
+  97:./System/Src/usart.c **** void HAL_UART_MspInit(UART_HandleTypeDef *huart)
+  98:./System/Src/usart.c **** {
+ 136              		.loc 1 98 0
+ 137              		.cfi_startproc
+ARM GAS  /tmp/ccknLsux.s 			page 5
+
+
+ 138              		@ args = 0, pretend = 0, frame = 32
+ 139              		@ frame_needed = 0, uses_anonymous_args = 0
+ 140              	.LVL6:
+  99:./System/Src/usart.c ****     //GPIO∂Àø⁄…Ë÷√
+ 100:./System/Src/usart.c **** 	GPIO_InitTypeDef GPIO_Initure;
+ 101:./System/Src/usart.c **** 	
+ 102:./System/Src/usart.c **** 	if(huart->Instance==USART1)//»Áπ˚ «¥Æø⁄1£¨Ω¯––¥Æø⁄1 MSP≥ı ºªØ
+ 141              		.loc 1 102 0
+ 142 0000 0268     		ldr	r2, [r0]
+ 143 0002 224B     		ldr	r3, .L14
+ 144 0004 9A42     		cmp	r2, r3
+ 145 0006 3FD1     		bne	.L13
+  98:./System/Src/usart.c ****     //GPIO∂Àø⁄…Ë÷√
+ 146              		.loc 1 98 0
+ 147 0008 30B5     		push	{r4, r5, lr}
+ 148              	.LCFI1:
+ 149              		.cfi_def_cfa_offset 12
+ 150              		.cfi_offset 4, -12
+ 151              		.cfi_offset 5, -8
+ 152              		.cfi_offset 14, -4
+ 153 000a 89B0     		sub	sp, sp, #36
+ 154              	.LCFI2:
+ 155              		.cfi_def_cfa_offset 48
+ 156              	.LBB2:
+ 103:./System/Src/usart.c **** 	{
+ 104:./System/Src/usart.c **** 		__HAL_RCC_GPIOA_CLK_ENABLE();			// πƒ‹GPIOA ±÷”
+ 157              		.loc 1 104 0
+ 158 000c 03F55843 		add	r3, r3, #55296
+ 159 0010 9A69     		ldr	r2, [r3, #24]
+ 160 0012 42F00402 		orr	r2, r2, #4
+ 161 0016 9A61     		str	r2, [r3, #24]
+ 162 0018 9A69     		ldr	r2, [r3, #24]
+ 163 001a 02F00402 		and	r2, r2, #4
+ 164 001e 0192     		str	r2, [sp, #4]
+ 165 0020 019A     		ldr	r2, [sp, #4]
+ 166              	.LBE2:
+ 167              	.LBB3:
+ 105:./System/Src/usart.c **** 		__HAL_RCC_USART1_CLK_ENABLE();			// πƒ‹USART1 ±÷”
+ 168              		.loc 1 105 0
+ 169 0022 9A69     		ldr	r2, [r3, #24]
+ 170 0024 42F48042 		orr	r2, r2, #16384
+ 171 0028 9A61     		str	r2, [r3, #24]
+ 172 002a 9A69     		ldr	r2, [r3, #24]
+ 173 002c 02F48042 		and	r2, r2, #16384
+ 174 0030 0292     		str	r2, [sp, #8]
+ 175 0032 029A     		ldr	r2, [sp, #8]
+ 176              	.LBE3:
+ 177              	.LBB4:
+ 106:./System/Src/usart.c **** 		__HAL_RCC_AFIO_CLK_ENABLE();
+ 178              		.loc 1 106 0
+ 179 0034 9A69     		ldr	r2, [r3, #24]
+ 180 0036 42F00102 		orr	r2, r2, #1
+ 181 003a 9A61     		str	r2, [r3, #24]
+ 182 003c 9B69     		ldr	r3, [r3, #24]
+ 183 003e 03F00103 		and	r3, r3, #1
+ 184 0042 0393     		str	r3, [sp, #12]
+ 185 0044 039B     		ldr	r3, [sp, #12]
+ARM GAS  /tmp/ccknLsux.s 			page 6
+
+
+ 186              	.LBE4:
+ 107:./System/Src/usart.c **** 	
+ 108:./System/Src/usart.c **** 		GPIO_Initure.Pin=GPIO_PIN_9;			//PA9
+ 187              		.loc 1 108 0
+ 188 0046 4FF40073 		mov	r3, #512
+ 189 004a 0493     		str	r3, [sp, #16]
+ 109:./System/Src/usart.c **** 		GPIO_Initure.Mode=GPIO_MODE_AF_PP;		//∏¥”√Õ∆ÕÏ ‰≥ˆ
+ 190              		.loc 1 109 0
+ 191 004c 0223     		movs	r3, #2
+ 192 004e 0593     		str	r3, [sp, #20]
+ 110:./System/Src/usart.c **** 		GPIO_Initure.Pull=GPIO_PULLUP;			//…œ¿≠
+ 193              		.loc 1 110 0
+ 194 0050 0123     		movs	r3, #1
+ 195 0052 0693     		str	r3, [sp, #24]
+ 111:./System/Src/usart.c **** 		GPIO_Initure.Speed=GPIO_SPEED_FREQ_HIGH;//∏ﬂÀŸ
+ 196              		.loc 1 111 0
+ 197 0054 0324     		movs	r4, #3
+ 198 0056 0794     		str	r4, [sp, #28]
+ 112:./System/Src/usart.c **** 		HAL_GPIO_Init(GPIOA,&GPIO_Initure);	   	//≥ı ºªØPA9
+ 199              		.loc 1 112 0
+ 200 0058 0D4D     		ldr	r5, .L14+4
+ 201 005a 04A9     		add	r1, sp, #16
+ 202 005c 2846     		mov	r0, r5
+ 203              	.LVL7:
+ 204 005e FFF7FEFF 		bl	HAL_GPIO_Init
+ 205              	.LVL8:
+ 113:./System/Src/usart.c **** 
+ 114:./System/Src/usart.c **** 		GPIO_Initure.Pin=GPIO_PIN_10;			//PA10
+ 206              		.loc 1 114 0
+ 207 0062 4FF48063 		mov	r3, #1024
+ 208 0066 0493     		str	r3, [sp, #16]
+ 115:./System/Src/usart.c **** 		GPIO_Initure.Mode=GPIO_MODE_AF_INPUT;	//ƒ£ Ω“™…Ë÷√Œ™∏¥”√ ‰»Îƒ£ Ω£°	
+ 209              		.loc 1 115 0
+ 210 0068 0023     		movs	r3, #0
+ 211 006a 0593     		str	r3, [sp, #20]
+ 116:./System/Src/usart.c **** 		HAL_GPIO_Init(GPIOA,&GPIO_Initure);	   	//≥ı ºªØPA10
+ 212              		.loc 1 116 0
+ 213 006c 04A9     		add	r1, sp, #16
+ 214 006e 2846     		mov	r0, r5
+ 215 0070 FFF7FEFF 		bl	HAL_GPIO_Init
+ 216              	.LVL9:
+ 117:./System/Src/usart.c **** 		
+ 118:./System/Src/usart.c **** #if EN_USART1_RX
+ 119:./System/Src/usart.c **** 		HAL_NVIC_EnableIRQ(USART1_IRQn);				// πƒ‹USART1÷–∂œÕ®µ¿
+ 217              		.loc 1 119 0
+ 218 0074 2520     		movs	r0, #37
+ 219 0076 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 220              	.LVL10:
+ 120:./System/Src/usart.c **** 		HAL_NVIC_SetPriority(USART1_IRQn,3,3);			//«¿’º”≈œ»º∂3£¨◊””≈œ»º∂3
+ 221              		.loc 1 120 0
+ 222 007a 2246     		mov	r2, r4
+ 223 007c 2146     		mov	r1, r4
+ 224 007e 2520     		movs	r0, #37
+ 225 0080 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 226              	.LVL11:
+ 121:./System/Src/usart.c **** #endif	
+ 122:./System/Src/usart.c **** 	}
+ARM GAS  /tmp/ccknLsux.s 			page 7
+
+
+ 123:./System/Src/usart.c **** }
+ 227              		.loc 1 123 0
+ 228 0084 09B0     		add	sp, sp, #36
+ 229              	.LCFI3:
+ 230              		.cfi_def_cfa_offset 12
+ 231              		@ sp needed
+ 232 0086 30BD     		pop	{r4, r5, pc}
+ 233              	.LVL12:
+ 234              	.L13:
+ 235              	.LCFI4:
+ 236              		.cfi_def_cfa_offset 0
+ 237              		.cfi_restore 4
+ 238              		.cfi_restore 5
+ 239              		.cfi_restore 14
+ 240 0088 7047     		bx	lr
+ 241              	.L15:
+ 242 008a 00BF     		.align	2
+ 243              	.L14:
+ 244 008c 00380140 		.word	1073821696
+ 245 0090 00080140 		.word	1073809408
+ 246              		.cfi_endproc
+ 247              	.LFE67:
+ 249              		.section	.text.HAL_UART_RxCpltCallback,"ax",%progbits
+ 250              		.align	2
+ 251              		.global	HAL_UART_RxCpltCallback
+ 252              		.thumb
+ 253              		.thumb_func
+ 255              	HAL_UART_RxCpltCallback:
+ 256              	.LFB68:
+ 124:./System/Src/usart.c **** 
+ 125:./System/Src/usart.c **** void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+ 126:./System/Src/usart.c **** {
+ 257              		.loc 1 126 0
+ 258              		.cfi_startproc
+ 259              		@ args = 0, pretend = 0, frame = 0
+ 260              		@ frame_needed = 0, uses_anonymous_args = 0
+ 261              		@ link register save eliminated.
+ 262              	.LVL13:
+ 127:./System/Src/usart.c **** 	if(huart->Instance==USART1)//»Áπ˚ «¥Æø⁄1
+ 263              		.loc 1 127 0
+ 264 0000 0268     		ldr	r2, [r0]
+ 265 0002 194B     		ldr	r3, .L21
+ 266 0004 9A42     		cmp	r2, r3
+ 267 0006 2DD1     		bne	.L16
+ 128:./System/Src/usart.c **** 	{
+ 129:./System/Src/usart.c **** 		if((USART_RX_STA&0x8000)==0)//Ω” ’Œ¥ÕÍ≥…
+ 268              		.loc 1 129 0
+ 269 0008 184B     		ldr	r3, .L21+4
+ 270 000a 1B88     		ldrh	r3, [r3]
+ 271 000c 13F4004F 		tst	r3, #32768
+ 272 0010 28D1     		bne	.L16
+ 130:./System/Src/usart.c **** 		{
+ 131:./System/Src/usart.c **** 			if(USART_RX_STA&0x4000)//Ω” ’µΩ¡À0x0d
+ 273              		.loc 1 131 0
+ 274 0012 03F48042 		and	r2, r3, #16384
+ 275 0016 92B2     		uxth	r2, r2
+ 276 0018 72B1     		cbz	r2, .L18
+ARM GAS  /tmp/ccknLsux.s 			page 8
+
+
+ 132:./System/Src/usart.c **** 			{
+ 133:./System/Src/usart.c **** 				if(aRxBuffer[0]!=0x0a)USART_RX_STA=0;//Ω” ’¥ÌŒÛ,÷ÿ–¬ø™ º
+ 277              		.loc 1 133 0
+ 278 001a 154A     		ldr	r2, .L21+8
+ 279 001c 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 280 001e 0A2A     		cmp	r2, #10
+ 281 0020 03D0     		beq	.L19
+ 282              		.loc 1 133 0 is_stmt 0 discriminator 1
+ 283 0022 0022     		movs	r2, #0
+ 284 0024 114B     		ldr	r3, .L21+4
+ 285 0026 1A80     		strh	r2, [r3]	@ movhi
+ 286 0028 7047     		bx	lr
+ 287              	.L19:
+ 134:./System/Src/usart.c **** 				else USART_RX_STA|=0x8000;	//Ω” ’ÕÍ≥…¡À 
+ 288              		.loc 1 134 0 is_stmt 1
+ 289 002a 6FEA4343 		mvn	r3, r3, lsl #17
+ 290 002e 6FEA5343 		mvn	r3, r3, lsr #17
+ 291 0032 0E4A     		ldr	r2, .L21+4
+ 292 0034 1380     		strh	r3, [r2]	@ movhi
+ 293 0036 7047     		bx	lr
+ 294              	.L18:
+ 135:./System/Src/usart.c **** 			}
+ 136:./System/Src/usart.c **** 			else //ªπ√ª ’µΩ0X0D
+ 137:./System/Src/usart.c **** 			{	
+ 138:./System/Src/usart.c **** 				if(aRxBuffer[0]==0x0d)USART_RX_STA|=0x4000;
+ 295              		.loc 1 138 0
+ 296 0038 0D4A     		ldr	r2, .L21+8
+ 297 003a 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 298 003c 0D2A     		cmp	r2, #13
+ 299 003e 04D1     		bne	.L20
+ 300              		.loc 1 138 0 is_stmt 0 discriminator 1
+ 301 0040 43F48043 		orr	r3, r3, #16384
+ 302 0044 094A     		ldr	r2, .L21+4
+ 303 0046 1380     		strh	r3, [r2]	@ movhi
+ 304 0048 7047     		bx	lr
+ 305              	.L20:
+ 139:./System/Src/usart.c **** 				else
+ 140:./System/Src/usart.c **** 				{
+ 141:./System/Src/usart.c **** 					USART_RX_BUF[USART_RX_STA&0X3FFF]=aRxBuffer[0] ;
+ 306              		.loc 1 141 0 is_stmt 1
+ 307 004a C3F30D01 		ubfx	r1, r3, #0, #14
+ 308 004e 0948     		ldr	r0, .L21+12
+ 309              	.LVL14:
+ 310 0050 4254     		strb	r2, [r0, r1]
+ 142:./System/Src/usart.c **** 					USART_RX_STA++;
+ 311              		.loc 1 142 0
+ 312 0052 0133     		adds	r3, r3, #1
+ 313 0054 9BB2     		uxth	r3, r3
+ 314 0056 054A     		ldr	r2, .L21+4
+ 315 0058 1380     		strh	r3, [r2]	@ movhi
+ 143:./System/Src/usart.c **** 					if(USART_RX_STA>(USART_REC_LEN-1))USART_RX_STA=0;//Ω” ’ ˝æ›¥ÌŒÛ,÷ÿ–¬ø™ ºΩ” ’	  
+ 316              		.loc 1 143 0
+ 317 005a C72B     		cmp	r3, #199
+ 318 005c 02D9     		bls	.L16
+ 319              		.loc 1 143 0 is_stmt 0 discriminator 1
+ 320 005e 0022     		movs	r2, #0
+ 321 0060 024B     		ldr	r3, .L21+4
+ARM GAS  /tmp/ccknLsux.s 			page 9
+
+
+ 322 0062 1A80     		strh	r2, [r3]	@ movhi
+ 323              	.L16:
+ 324 0064 7047     		bx	lr
+ 325              	.L22:
+ 326 0066 00BF     		.align	2
+ 327              	.L21:
+ 328 0068 00380140 		.word	1073821696
+ 329 006c 00000000 		.word	.LANCHOR0
+ 330 0070 00000000 		.word	aRxBuffer
+ 331 0074 00000000 		.word	USART_RX_BUF
+ 332              		.cfi_endproc
+ 333              	.LFE68:
+ 335              		.section	.text.USART1_IRQHandler,"ax",%progbits
+ 336              		.align	2
+ 337              		.global	USART1_IRQHandler
+ 338              		.thumb
+ 339              		.thumb_func
+ 341              	USART1_IRQHandler:
+ 342              	.LFB69:
+ 144:./System/Src/usart.c **** 				}		 
+ 145:./System/Src/usart.c **** 			}
+ 146:./System/Src/usart.c **** 		}
+ 147:./System/Src/usart.c **** 
+ 148:./System/Src/usart.c **** 	}
+ 149:./System/Src/usart.c **** }
+ 150:./System/Src/usart.c ****  
+ 151:./System/Src/usart.c **** //¥Æø⁄1÷–∂œ∑˛ŒÒ≥Ã–Ú
+ 152:./System/Src/usart.c **** void USART1_IRQHandler(void)                	
+ 153:./System/Src/usart.c **** { 
+ 343              		.loc 1 153 0 is_stmt 1
+ 344              		.cfi_startproc
+ 345              		@ args = 0, pretend = 0, frame = 0
+ 346              		@ frame_needed = 0, uses_anonymous_args = 0
+ 347 0000 08B5     		push	{r3, lr}
+ 348              	.LCFI5:
+ 349              		.cfi_def_cfa_offset 8
+ 350              		.cfi_offset 3, -8
+ 351              		.cfi_offset 14, -4
+ 352              	.LVL15:
+ 154:./System/Src/usart.c **** 	u32 timeout=0;
+ 155:./System/Src/usart.c **** #if SYSTEM_SUPPORT_OS	 	// π”√OS
+ 156:./System/Src/usart.c **** 	OSIntEnter();    
+ 157:./System/Src/usart.c **** #endif
+ 158:./System/Src/usart.c **** 	
+ 159:./System/Src/usart.c **** 	HAL_UART_IRQHandler(&UART1_Handler);	//µ˜”√HALø‚÷–∂œ¥¶¿Ìπ´”√∫Ø ˝
+ 353              		.loc 1 159 0
+ 354 0002 0848     		ldr	r0, .L27
+ 355 0004 FFF7FEFF 		bl	HAL_UART_IRQHandler
+ 356              	.LVL16:
+ 357              	.L24:
+ 160:./System/Src/usart.c **** 	
+ 161:./System/Src/usart.c **** 	timeout=0;
+ 162:./System/Src/usart.c ****     while (HAL_UART_GetState(&UART1_Handler) != HAL_UART_STATE_READY)//µ»¥˝æÕ–˜
+ 358              		.loc 1 162 0
+ 359 0008 0648     		ldr	r0, .L27
+ 360 000a FFF7FEFF 		bl	HAL_UART_GetState
+ 361              	.LVL17:
+ARM GAS  /tmp/ccknLsux.s 			page 10
+
+
+ 362 000e 2028     		cmp	r0, #32
+ 363 0010 FAD1     		bne	.L24
+ 364              	.L25:
+ 163:./System/Src/usart.c **** 	{
+ 164:./System/Src/usart.c **** 	 timeout++;////≥¨ ±¥¶¿Ì
+ 165:./System/Src/usart.c ****      if(timeout>HAL_MAX_DELAY) break;		
+ 166:./System/Src/usart.c **** 	
+ 167:./System/Src/usart.c **** 	}
+ 168:./System/Src/usart.c ****      
+ 169:./System/Src/usart.c **** 	timeout=0;
+ 170:./System/Src/usart.c **** 	while(HAL_UART_Receive_IT(&UART1_Handler, (u8 *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)//“ª¥Œ¥¶¿ÌÕÍ≥…÷
+ 365              		.loc 1 170 0
+ 366 0012 0122     		movs	r2, #1
+ 367 0014 0449     		ldr	r1, .L27+4
+ 368 0016 0348     		ldr	r0, .L27
+ 369 0018 FFF7FEFF 		bl	HAL_UART_Receive_IT
+ 370              	.LVL18:
+ 371 001c 0028     		cmp	r0, #0
+ 372 001e F8D1     		bne	.L25
+ 171:./System/Src/usart.c **** 	{
+ 172:./System/Src/usart.c **** 	 timeout++; //≥¨ ±¥¶¿Ì
+ 173:./System/Src/usart.c **** 	 if(timeout>HAL_MAX_DELAY) break;	
+ 174:./System/Src/usart.c **** 	}
+ 175:./System/Src/usart.c **** #if SYSTEM_SUPPORT_OS	 	// π”√OS
+ 176:./System/Src/usart.c **** 	OSIntExit();  											 
+ 177:./System/Src/usart.c **** #endif
+ 178:./System/Src/usart.c **** } 
+ 373              		.loc 1 178 0
+ 374 0020 08BD     		pop	{r3, pc}
+ 375              	.L28:
+ 376 0022 00BF     		.align	2
+ 377              	.L27:
+ 378 0024 00000000 		.word	UART1_Handler
+ 379 0028 00000000 		.word	aRxBuffer
+ 380              		.cfi_endproc
+ 381              	.LFE69:
+ 383              		.comm	UART1_Handler,64,4
+ 384              		.comm	aRxBuffer,1,4
+ 385              		.global	USART_RX_STA
+ 386              		.comm	USART_RX_BUF,200,4
+ 387              		.comm	__stdout,104,4
+ 388              		.section	.bss.USART_RX_STA,"aw",%nobits
+ 389              		.align	1
+ 390              		.set	.LANCHOR0,. + 0
+ 393              	USART_RX_STA:
+ 394 0000 0000     		.space	2
+ 395              		.text
+ 396              	.Letext0:
+ 397              		.file 2 "/opt/toolchain/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/machine/_default_types.
+ 398              		.file 3 "/opt/toolchain/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/sys/_stdint.h"
+ 399              		.file 4 "Drivers/CMSIS/Device/Inc/stm32f103xb.h"
+ 400              		.file 5 "/opt/toolchain/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/sys/lock.h"
+ 401              		.file 6 "/opt/toolchain/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/sys/_types.h"
+ 402              		.file 7 "/opt/toolchain/gcc-arm-none-eabi-5_4-2016q3/lib/gcc/arm-none-eabi/5.4.1/include/stddef.h"
+ 403              		.file 8 "/opt/toolchain/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/sys/reent.h"
+ 404              		.file 9 "/opt/toolchain/gcc-arm-none-eabi-5_4-2016q3/arm-none-eabi/include/stdio.h"
+ 405              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ARM GAS  /tmp/ccknLsux.s 			page 11
+
+
+ 406              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 407              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 408              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h"
+ 409              		.file 14 "System/Inc/sys.h"
+ 410              		.file 15 "Drivers/CMSIS/Inc/core_cm3.h"
+ 411              		.file 16 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h"
+ARM GAS  /tmp/ccknLsux.s 			page 12
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 usart.c
+     /tmp/ccknLsux.s:20     .text._sys_exit:00000000 $t
+     /tmp/ccknLsux.s:25     .text._sys_exit:00000000 _sys_exit
+     /tmp/ccknLsux.s:39     .text.fputc:00000000 $t
+     /tmp/ccknLsux.s:44     .text.fputc:00000000 fputc
+     /tmp/ccknLsux.s:67     .text.fputc:00000014 $d
+     /tmp/ccknLsux.s:72     .text.uart_init:00000000 $t
+     /tmp/ccknLsux.s:77     .text.uart_init:00000000 uart_init
+     /tmp/ccknLsux.s:122    .text.uart_init:0000002c $d
+                            *COM*:00000040 UART1_Handler
+                            *COM*:00000001 aRxBuffer
+     /tmp/ccknLsux.s:129    .text.HAL_UART_MspInit:00000000 $t
+     /tmp/ccknLsux.s:134    .text.HAL_UART_MspInit:00000000 HAL_UART_MspInit
+     /tmp/ccknLsux.s:244    .text.HAL_UART_MspInit:0000008c $d
+     /tmp/ccknLsux.s:250    .text.HAL_UART_RxCpltCallback:00000000 $t
+     /tmp/ccknLsux.s:255    .text.HAL_UART_RxCpltCallback:00000000 HAL_UART_RxCpltCallback
+     /tmp/ccknLsux.s:328    .text.HAL_UART_RxCpltCallback:00000068 $d
+                            *COM*:000000c8 USART_RX_BUF
+     /tmp/ccknLsux.s:336    .text.USART1_IRQHandler:00000000 $t
+     /tmp/ccknLsux.s:341    .text.USART1_IRQHandler:00000000 USART1_IRQHandler
+     /tmp/ccknLsux.s:378    .text.USART1_IRQHandler:00000024 $d
+     /tmp/ccknLsux.s:393    .bss.USART_RX_STA:00000000 USART_RX_STA
+                            *COM*:00000068 __stdout
+     /tmp/ccknLsux.s:389    .bss.USART_RX_STA:00000000 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+HAL_UART_Init
+HAL_UART_Receive_IT
+HAL_GPIO_Init
+HAL_NVIC_EnableIRQ
+HAL_NVIC_SetPriority
+HAL_UART_IRQHandler
+HAL_UART_GetState
