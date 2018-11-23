@@ -40,7 +40,8 @@
 #include "sys.h"
 #include "delay.h"
 #include "usart.h"
-#include "stm32_hal_legacy.h"
+#include "adc.h"
+#include "led.h"
 
 /** @addtogroup STM32F1xx_HAL_Examples
   * @{
@@ -61,6 +62,54 @@ void Delay(__IO uint32_t nCount);
 void Delay(__IO uint32_t nCount)
 {
   while(nCount--){}
+}
+
+int OutData[4]; 
+unsigned short CRC_CHECK(unsigned char *Buf, unsigned char CRC_CNT)
+{
+    unsigned short CRC_Temp;
+    unsigned char i,j;
+    CRC_Temp = 0xffff;
+
+    for (i=0;i<CRC_CNT; i++){      
+        CRC_Temp ^= Buf[i];
+        for (j=0;j<8;j++) {
+            if (CRC_Temp & 0x01)
+                CRC_Temp = (CRC_Temp >>1 ) ^ 0xa001;
+            else
+                CRC_Temp = CRC_Temp >> 1;
+        }
+    }
+    return(CRC_Temp);
+}
+void OutPut_Data()
+{
+  int temp[4] = {0};
+  unsigned int temp1[4] = {0};
+  unsigned char databuf[10] = {0};
+  unsigned char i;
+  unsigned short CRC16 = 0;
+  for(i=0;i<4;i++)
+   {
+    
+    temp[i]  = OutData[i];
+    temp1[i] = (u16)temp[i];
+    
+   }
+   
+  for(i=0;i<4;i++) 
+  {
+    databuf[i*2]   = (s8)(temp1[i]%256);
+    databuf[i*2+1] = (s8)(temp1[i]/256);
+  }
+  
+  CRC16 = CRC_CHECK(databuf,8);
+  databuf[8] = CRC16%256;
+  databuf[9] = CRC16/256;
+  
+  //for(i=0;i<10;i++)
+  //uart_putchar(UART4,(char)databuf[i]); 
+  HAL_UART_Transmit(&UART1_Handler,(uint8_t*)databuf,10,1000);	//发送接收到的数据
 }
 
 /* Private functions ---------------------------------------------------------*/
@@ -91,28 +140,88 @@ int main(void)
 
   /* Add your application code here
      */
- 
-	GPIO_InitTypeDef GPIO_Initure;
-     
-    HAL_Init();                    	 			//初始化HAL库    
-    Stm32_Clock_Init(RCC_PLL_MUL9);   			//设置时钟,72M
-
-    __HAL_RCC_GPIOC_CLK_ENABLE();           	//开启GPIOC时钟
+ 	u16 adcx,adcx_HI;
+	float temp;
+	u8 len;	
+	u16 times=0;
+	u8 Test_RX_BUF[2]={}; 
 	
-    GPIO_Initure.Pin=GPIO_PIN_13; 				//PC8
-    GPIO_Initure.Mode=GPIO_MODE_OUTPUT_PP;  	//推挽输出
-    GPIO_Initure.Pull=GPIO_PULLUP;          	//上拉
-    GPIO_Initure.Speed=GPIO_SPEED_HIGH;    	 	//高速
-    HAL_GPIO_Init(GPIOC,&GPIO_Initure);
+    HAL_Init();                    	 	//初始化HAL库    
+    Stm32_Clock_Init(RCC_PLL_MUL9);   	//设置时钟,72M
+	delay_init(72);               		//初始化延时函数
+	uart_init(115200);					//初始化串口
+	//usmart_dev.init(84); 		  	  	//初始化USMART	
+	LED_Init();							//初始化LED	
+	MY_ADC_Init();                  	//初始化ADC1通道1
+	
+	// GPIO_InitTypeDef GPIO_Initure;
+    // __HAL_RCC_GPIOC_CLK_ENABLE();           	//开启GPIOC时钟
+	
+    // GPIO_Initure.Pin=GPIO_PIN_13; 				//PC8
+    // GPIO_Initure.Mode=GPIO_MODE_OUTPUT_PP;  	//推挽输出
+    // GPIO_Initure.Pull=GPIO_PULLUP;          	//上拉
+    // GPIO_Initure.Speed=GPIO_SPEED_HIGH;    	 	//高速
+    // HAL_GPIO_Init(GPIOC,&GPIO_Initure);
 
 	
 	/* Infinite loop */
 	while(1)
 	{
-		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,GPIO_PIN_SET);		//PC13置1 			
-		Delay(0x7FFFFF);
-		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,GPIO_PIN_RESET);	//PC13置0
-		Delay(0x7FFFFF);
+       if(USART_RX_STA&0x8000)
+		{					   
+			len=USART_RX_STA&0x3fff;//得到此次接收到的数据长度
+			printf("\r\n您发送的消息为:\r\n");
+			HAL_UART_Transmit(&UART1_Handler,(uint8_t*)USART_RX_BUF,len,1000);	//发送接收到的数据
+			while(__HAL_UART_GET_FLAG(&UART1_Handler,UART_FLAG_TC)!=SET);		//等待发送结束
+			printf("\r\n\r\n");//插入换行
+			USART_RX_STA=0;
+		}else
+		{
+			times++;
+			if(times%5000==0)
+			{
+				printf("\r\nALIENTEK MiniSTM32开发板 串口实验\r\n");
+				printf("正点原子@ALIENTEK\r\n\r\n\r\n");
+			}
+			if(times%200==0)printf("请输入数据,以回车键结束\r\n");  
+			if(times%30==0)LED0=!LED0;//闪烁LED,提示系统正在运行.
+			delay_ms(10);   
+		} 
+        adcx=0x0000;
+		adcx=Get_Adc_Average(ADC_CHANNEL_1,5);//获取通道1的转换值，20次取平均
+		//LCD_ShowxNum(134,130,adcx,4,16,0);    //显示ADCC采样后的原始值
+		// temp=(float)adcx*(3.3/4096);          //获取计算后的带小数的实际电压值，比如3.1111
+		// adcx=temp;                            //赋值整数部分给adcx变量，因为adcx为u16整形
+		//LCD_ShowxNum(134,150,adcx,1,16,0);    //显示电压值的整数部分，3.1111的话，这里就是显示3
+		// temp-=adcx;                           //把已经显示的整数部分去掉，留下小数部分，比如3.1111-3=0.1111
+		// temp*=1000;                           //小数部分乘以1000，例如：0.1111就转换为111.1，相当于保留三位小数。
+		//LCD_ShowxNum(150,150,temp,3,16,0X80); //显示小数部分（前面转换为了整形显示），这里显示的就是111.
+		adcx_HI = adcx;
+		//Test_RX_BUF[0] = (uint8_t)((adcx_HI>>8)&0x00ff);
+		//Test_RX_BUF[1] = (uint8_t)(adcx&0x00ff);
+		//HAL_UART_Transmit(&UART1_Handler,(uint8_t*)Test_RX_BUF,2,1000);	//发送接收到的数据
+		//while(__HAL_UART_GET_FLAG(&UART1_Handler,UART_FLAG_TC)!=SET);		//等待发送结束
+		
+		LED0=!LED0;
+		//delay_ms(100);		
+		
+		OutData[0] = adcx;
+		OutPut_Data();
+		
+		// for(int i = 1000;i>0;i--)
+		// {
+		  // OutData[0] = i;
+		  // OutData[1] = i*2;
+		  // OutData[2] = i*3;
+		  // OutData[3] = i*4;
+		  // OutPut_Data();
+		  // delay_ms(100);
+		// }
+	
+		// HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,GPIO_PIN_SET);		//PC13置1 			
+		// Delay(0x7FFFFF);
+		// HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,GPIO_PIN_RESET);	//PC13置0
+		// Delay(0x7FFFFF);
 	}
 }
 
