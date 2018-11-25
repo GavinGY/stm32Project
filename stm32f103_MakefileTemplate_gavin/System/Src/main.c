@@ -42,6 +42,8 @@
 #include "usart.h"
 #include "adc.h"
 #include "led.h"
+#include "myiic.h"
+#include "pca9685.h"
 
 /** @addtogroup STM32F1xx_HAL_Examples
   * @{
@@ -153,7 +155,8 @@ int main(void)
 	//usmart_dev.init(84); 		  	  	//初始化USMART	
 	LED_Init();							//初始化LED	
 	MY_ADC_Init();                  	//初始化ADC1通道1
-	
+	IIC_Init();//IIC初始化
+	pca9685_init();
 	// GPIO_InitTypeDef GPIO_Initure;
     // __HAL_RCC_GPIOC_CLK_ENABLE();           	//开启GPIOC时钟
 	
@@ -203,7 +206,14 @@ int main(void)
 		//while(__HAL_UART_GET_FLAG(&UART1_Handler,UART_FLAG_TC)!=SET);		//等待发送结束
 		
 		LED0=!LED0;
-		//delay_ms(100);		
+		//down();
+		//delay_ms(2000);	
+		//up();	
+		//delay_ms(2000);
+		for(u8 i=0;i<16;i++){
+			delay_ms(1);
+			setPWM(i,0,calculate_PWM((u8)(adcx/22.756)+1));
+		}
 		
 		OutData[0] = adcx;
 		OutPut_Data();
