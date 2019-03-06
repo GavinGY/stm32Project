@@ -52,7 +52,7 @@
 #include "usb_device.h"
 
 /* USER CODE BEGIN Includes */
-
+#include "usbd_cdc_if.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -112,6 +112,7 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  
   while (1)
   {
   /* USER CODE END WHILE */
@@ -121,6 +122,13 @@ int main(void)
 	Delay(0x00FFFFF);
 	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,GPIO_PIN_RESET);//PC13ç½?0
 	Delay(0x00FFFFF);
+	
+	
+	if(USB_S.OutFlag == 1){
+		USB_S.OutFlag = 0;
+		CDC_Transmit_FS(UserRxBufferFS, USB_S.ReLen);
+	}
+		
   }
   /* USER CODE END 3 */
 

@@ -71,6 +71,20 @@
   * @{
   */ 
 /* USER CODE BEGIN EXPORTED_DEFINES */
+#define APP_RX_DATA_SIZE  2048
+#define APP_TX_DATA_SIZE  2048
+
+uint8_t UserRxBufferFS[APP_RX_DATA_SIZE];
+
+typedef struct  
+{  
+   uint8_t   OutFlag;
+   uint8_t   EFlag[2];
+   uint8_t   SFlag;  
+   uint16_t  ReLen;  
+}USB_Dev; 
+
+USB_Dev USB_S;
 /* USER CODE END EXPORTED_DEFINES */
 
 /**

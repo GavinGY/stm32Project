@@ -64,6 +64,15 @@
   * @{
   */ 
 /* USER CODE BEGIN PRIVATE_TYPES */
+USB_Dev USB_S =
+{
+	0,
+	{0x0D,0x0A},
+	0,
+	0,
+};
+
+
 /* USER CODE END PRIVATE_TYPES */ 
 /**
   * @}
@@ -75,8 +84,8 @@
 /* USER CODE BEGIN PRIVATE_DEFINES */
 /* Define size for the receive and transmit buffer over CDC */
 /* It's up to user to redefine and/or remove those define */
-#define APP_RX_DATA_SIZE  2048
-#define APP_TX_DATA_SIZE  2048
+// #define APP_RX_DATA_SIZE  2048
+// #define APP_TX_DATA_SIZE  2048
 /* USER CODE END PRIVATE_DEFINES */
 /**
   * @}
@@ -266,10 +275,31 @@ static int8_t CDC_Control_FS  (uint8_t cmd, uint8_t* pbuf, uint16_t length)
 static int8_t CDC_Receive_FS (uint8_t* Buf, uint32_t *Len)
 {
   /* USER CODE BEGIN 6 */
-  USBD_CDC_SetRxBuffer(&hUsbDeviceFS, &Buf[0]);
-  USBD_CDC_ReceivePacket(&hUsbDeviceFS);
-  return (USBD_OK);
+  // USBD_CDC_SetRxBuffer(&hUsbDeviceFS, &Buf[0]);
+  // USBD_CDC_ReceivePacket(&hUsbDeviceFS);
+  // return (USBD_OK);
   /* USER CODE END 6 */ 
+  
+	if(USB_S.OutFlag){
+		USB_S.OutFlag = 0;
+		USB_S.ReLen = 0;
+	}
+  
+	//将已接收数据长度赋值给USB_S.ReLen
+    USB_S.ReLen = *Len; 
+	
+	//设置接收数据的位置
+	USBD_CDC_SetRxBuffer(&hUsbDeviceFS, UserRxBufferFS);
+	USBD_CDC_ReceivePacket(&hUsbDeviceFS);   //准备接收数据
+	
+	//判断是否有结束标志以及接收数据长度是否达到UserRxBufferFS长度上限
+	if((USB_S.ReLen >= APP_RX_DATA_SIZE) || \
+	   (UserRxBufferFS[USB_S.ReLen-2] == USB_S.EFlag[0] && \
+		UserRxBufferFS[USB_S.ReLen-1] == USB_S.EFlag[1])) {
+	  USB_S.OutFlag = 1;
+	}
+
+	return (USBD_OK); 
 }
 
 /**
